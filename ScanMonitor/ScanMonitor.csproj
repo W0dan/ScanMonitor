@@ -69,6 +69,9 @@
     <Compile Include="Database\GetDocumentTypes\GetDocumentTypesQuery.cs" />
     <Compile Include="Database\GetPeople\GetPeopleQuery.cs" />
     <Compile Include="Database\GetPeople\PersonDto.cs" />
+    <Compile Include="Database\SearchDocuments\DocumentDto.cs" />
+    <Compile Include="Database\SearchDocuments\SearchDocumentsQuery.cs" />
+    <Compile Include="Database\SearchDocuments\SearchDocumentsRequest.cs" />
     <Compile Include="Logic\ProcessDocument\NewDocumentCommand.cs" />
     <Compile Include="Logic\ProcessDocument\NewDocumentHandler.cs" />
     <Compile Include="ScannedFilesWatcher.cs" />

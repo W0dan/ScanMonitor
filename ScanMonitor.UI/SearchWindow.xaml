@@ -1,0 +1,60 @@
+﻿<Window x:Class="ScanMonitor.UI.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScanMonitor.UI"
+        mc:Ignorable="d"
+        Title="SearchWindow" Height="600" Width="900"
+        WindowStartupLocation="CenterOwner"
+        Loaded="SearchWindow_OnLoaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="1" Grid.Column="1" FontSize="16" Name="DocumentTypeLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Document type:</Label>
+        <ComboBox Grid.Row="1" Grid.Column="2" FontSize="16" Name="DocumentTypeDropdown" VerticalAlignment="Center"></ComboBox>
+
+        <Label Grid.Row="2" Grid.Column="1" FontSize="16" Name="VoorWieLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Voor wie:</Label>
+        <ComboBox Grid.Row="2" Grid.Column="2" FontSize="16" Name="VoorWieDropdown" VerticalAlignment="Center"></ComboBox>
+
+        <Label Grid.Row="3" Grid.Column="1" FontSize="16" Name="CorrespondentLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Correspondent (Van wie):</Label>
+        <ComboBox Grid.Row="3" Grid.Column="2" FontSize="16" Name="CorrespondentDropdown" VerticalAlignment="Center"></ComboBox>
+
+        <Label Grid.Row="4" Grid.Column="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Datum ontvangen:</Label>
+        <DatePicker Grid.Row="4" Grid.Column="2" FontSize="16" Name="DatumOntvangenDatePicker" VerticalAlignment="Center"></DatePicker>
+
+        <Label Grid.Row="5" Grid.Column="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Zoekterm:</Label>
+        <TextBox Grid.Row="5" Grid.Column="2" FontSize="16" Name="DescriptionTextbox" VerticalAlignment="Center"></TextBox>
+
+        <Button Grid.Row="6" Grid.Column="2" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="Images/Symbols Find.ico"></Image></Button>
+        
+        <StackPanel Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Name="FoundItemsStackPanel"></StackPanel>
+        <DataGrid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="DocumentType" Binding="{Binding DocumentType}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Voor wie ?" Binding="{Binding VoorWie}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Correspondent" Binding="{Binding Correspondent}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Datum ontvangen" Binding="{Binding DatumOntvangen}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Beschrijving}"></DataGridTextColumn>
+                <DataGridHyperlinkColumn Header="Bestand" Binding="{Binding FileName}" Width="300"></DataGridHyperlinkColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

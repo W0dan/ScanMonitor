@@ -35,5 +35,15 @@ namespace ScanMonitor.UI
                 });
             }
         }
+
+        private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void SearchMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchWindow.StartSearch(this);
+        }
     }
 }

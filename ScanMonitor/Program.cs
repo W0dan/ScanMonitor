@@ -1,5 +1,4 @@
 ﻿using System;
-using ScanMonitor.Database;
 
 namespace ScanMonitor
 {
@@ -7,10 +6,7 @@ namespace ScanMonitor
     {
         static void Main(string[] args)
         {
-            var cfw = ScannedFilesWatcher.StartWatching(@"H:\SCANS");
-
-
-
+            Console.WriteLine("Please use the UI application.");
 
             Console.ReadLine();
         }

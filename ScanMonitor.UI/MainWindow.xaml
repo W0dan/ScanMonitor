@@ -6,16 +6,29 @@
         xmlns:local="clr-namespace:ScanMonitor.UI"
         xmlns:forms="clr-namespace:Spire.PdfViewer.Forms;assembly=Spire.PdfViewer.Forms"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1800"
+        Title="ScanMonitor" Height="1000" Width="1800"
         WindowStartupLocation="CenterScreen"
-        Loaded="MainWindow_OnLoaded">
+        Loaded="MainWindow_OnLoaded"
+        Icon="Images/Hardware Scanner 1.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="26"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" Name="ProcessedFiles"></StackPanel>
+        <Menu Grid.Row="0" Grid.Column="0">
+            <MenuItem Header="_File" FontSize="16">
+                <MenuItem Header="Search" Click="SearchMenuItem_OnClick">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Symbols Find.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="_Exit" Click="ExitMenuItem_OnClick"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" Grid.Column="0" Name="ProcessedFiles"></StackPanel>
     </Grid>
 </Window>

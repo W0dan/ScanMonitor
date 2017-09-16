@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6408CA5E-9B6B-45FF-A7DE-BCD3C302BD26}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ScanMonitor</RootNamespace>
+    <AssemblyName>ScanMonitor</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Database\CreateDocument\CreateDocumentCommand.cs" />
+    <Compile Include="Database\CreateDocument\CreateDocumentQuery.cs" />
+    <Compile Include="Database\CreateScan\CreateScanCommand.cs" />
+    <Compile Include="Database\CreateScan\CreateScanQuery.cs" />
+    <Compile Include="Database\DatabaseConnection.cs" />
+    <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenCommand.cs" />
+    <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenQuery.cs" />
+    <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenCommand.cs" />
+    <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenQuery.cs" />
+    <Compile Include="Database\GetCorrespondents\CorrespondentDto.cs" />
+    <Compile Include="Database\GetCorrespondents\GetCorrespondentsQuery.cs" />
+    <Compile Include="Database\GetDocumentFolderInfo\DocumentDto.cs" />
+    <Compile Include="Database\GetDocumentFolderInfo\GetDocumentFolderInfoQuery.cs" />
+    <Compile Include="Database\GetDocumentsByToday\DocumentDto.cs" />
+    <Compile Include="Database\GetDocumentsByToday\GetDocumentsByTodayQuery.cs" />
+    <Compile Include="Database\GetDocumentTypes\DocumentTypeDto.cs" />
+    <Compile Include="Database\GetDocumentTypes\GetDocumentTypesQuery.cs" />
+    <Compile Include="Database\GetPeople\GetPeopleQuery.cs" />
+    <Compile Include="Database\GetPeople\PersonDto.cs" />
+    <Compile Include="Logic\ProcessDocument\NewDocumentCommand.cs" />
+    <Compile Include="Logic\ProcessDocument\NewDocumentHandler.cs" />
+    <Compile Include="ScannedFilesWatcher.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\RemoveDocument\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

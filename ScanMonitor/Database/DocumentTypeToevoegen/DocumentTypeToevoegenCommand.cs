@@ -1,0 +1,8 @@
+﻿namespace ScanMonitor.Database.DocumentTypeToevoegen
+{
+    public class DocumentTypeToevoegenCommand
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+}

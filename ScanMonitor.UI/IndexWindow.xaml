@@ -1,0 +1,99 @@
+﻿<Window x:Class="ScanMonitor.UI.IndexWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScanMonitor.UI"
+        mc:Ignorable="d"
+        Title="IndexWindow" Height="800" Width="1600"
+        WindowStartupLocation="CenterOwner"
+        Loaded="IndexWindow_OnLoaded">
+    <Grid Name="LayoutGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Name="FieldsGrid" Grid.Column="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Name="ExistingDocumentGrid" Visibility="Hidden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35*"></ColumnDefinition>
+                    <ColumnDefinition Width="65*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Document:</Label>
+                <ComboBox Grid.Row="1" Grid.Column="1" FontSize="16" Name="DocumentsDropdown" VerticalAlignment="Center"></ComboBox>
+            </Grid>
+            <Grid Name="NewDocumentGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35*"></ColumnDefinition>
+                    <ColumnDefinition Width="60*"></ColumnDefinition>
+                    <ColumnDefinition Width="35"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="1" Grid.Column="0" FontSize="16" Name="DocumentTypeLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Document type:</Label>
+                <ComboBox Grid.Row="1" Grid.Column="1" FontSize="16" Name="DocumentTypeDropdown" VerticalAlignment="Center"></ComboBox>
+                <Button Grid.Row="1" Grid.Column="2" FontSize="16" Name="AddDocumentTypeButton" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1" Click="AddDocumentTypeButton_OnClick">+</Button>
+
+                <Label Grid.Row="2" Grid.Column="0" FontSize="16" Name="VoorWieLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Voor wie:</Label>
+                <ComboBox Grid.Row="2" Grid.Column="1" FontSize="16" Name="VoorWieDropdown" VerticalAlignment="Center"></ComboBox>
+
+                <Label Grid.Row="3" Grid.Column="0" FontSize="16" Name="CorrespondentLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Correspondent (Van wie):</Label>
+                <ComboBox Grid.Row="3" Grid.Column="1" FontSize="16" Name="CorrespondentDropdown" VerticalAlignment="Center"></ComboBox>
+                <Button Grid.Row="3" Grid.Column="2" FontSize="16" Name="AddCorrespondentButton" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1" Click="AddCorrespondentButton_OnClick">+</Button>
+
+                <Label Grid.Row="4" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Datum ontvangen:</Label>
+                <DatePicker Grid.Row="4" Grid.Column="1" FontSize="16" Name="DatumOntvangenDatePicker" VerticalAlignment="Center"></DatePicker>
+
+                <Label Grid.Row="5" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Beschrijving:</Label>
+                <TextBox Grid.Row="5" Grid.Column="1" FontSize="16" Name="DescriptionTextbox" VerticalAlignment="Center"></TextBox>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Name="Buttons">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="60"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.ColumnSpan="3" Name="ValidationErrorsLabel" FontSize="16" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+                
+                <Button Grid.Row="1" Grid.Column="1" Margin="10" Name="VerwijderenButton" Click="VerwijderenButton_OnClick">Verwijderen</Button>
+                <Button Grid.Row="1" Grid.Column="2" Margin="10" Name="ToevoegenButton" Click="ToevoegenButton_OnClick">Toevoegen</Button>
+            </Grid>
+            
+            <RadioButton Grid.Row="0" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" Checked="NewDocumentRadioButton_OnChecked">Nieuw document</RadioButton>
+            <RadioButton Grid.Row="0" Grid.Column="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="False" Checked="ExistingDocumentRadioButton_OnChecked">Bestaand document</RadioButton>
+        </Grid>
+    </Grid>
+</Window>

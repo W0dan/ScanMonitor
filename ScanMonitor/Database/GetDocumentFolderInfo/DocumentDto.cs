@@ -1,3 +1,5 @@
+using System;
+
 namespace ScanMonitor.Database.GetDocumentFolderInfo
 {
     public class DocumentDto
@@ -5,5 +7,6 @@ namespace ScanMonitor.Database.GetDocumentFolderInfo
         public string Person { get; set; }
         public string DocumentType { get; set; }
         public string Correspondent { get; set; }
+        public DateTime Datum { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using ScanMonitor.Database.GetCorrespondents;
 using ScanMonitor.Database.GetDocumentsByToday;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.GetPeople;
-using ScanMonitor.Logic.ProcessDocument;
+using ScanMonitor.Logic.NewScan;
 using ScanMonitor.UI.Dialogs;
 using ScanMonitor.UI.Extensions;
 using static ScanMonitor.UI.Extensions.TryExtensions;
@@ -160,6 +160,37 @@ namespace ScanMonitor.UI
 
         private void ToevoegenButton_OnClick(object sender, RoutedEventArgs e)
         {
+            if (ExistingDocumentRadioButton.IsChecked ?? false)
+            {
+                ScanToevoegenAanBestaandDocument();
+            }
+            else
+            {
+                NieuwDocument();
+            }
+        }
+
+        private void ScanToevoegenAanBestaandDocument()
+        {
+            var documentIdString = DocumentsDropdown.SelectedValue?.ToString() ?? "";
+            if (string.IsNullOrEmpty(documentIdString))
+            {
+                DocumentsLabel.Background = Brushes.Red;
+                ValidationErrorsLabel.Content = "Gelieve een document te selecteren";
+            }
+
+            var command = new NewScanCommand
+            {
+                Filename = FileName,
+                DocumentId = new Guid(documentIdString),
+            };
+            NewScanHandler.Handle(command);
+
+            Close();
+        }
+
+        private void NieuwDocument()
+        {
             var validationErrors = "";
 
             DocumentTypeLabel.Background = Brushes.Transparent;
@@ -194,7 +225,7 @@ namespace ScanMonitor.UI
                 return;
             }
 
-            var command = new NewDocumentCommand
+            var command = new NewScanCommand
             {
                 Filename = FileName,
                 DocumentTypeId = new Guid(documentTypeIdString),
@@ -203,7 +234,7 @@ namespace ScanMonitor.UI
                 Datum = DatumOntvangenDatePicker.SelectedDate ?? DateTime.Today,
                 Description = DescriptionTextbox.Text
             };
-            NewDocumentHandler.Handle(command);
+            NewScanHandler.Handle(command);
 
             Close();
         }

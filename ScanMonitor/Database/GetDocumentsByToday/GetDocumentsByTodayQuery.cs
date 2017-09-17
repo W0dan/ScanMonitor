@@ -8,12 +8,17 @@ namespace ScanMonitor.Database.GetDocumentsByToday
     {
         public static List<DocumentDto> List()
         {
-            const string query = "SELECT distinct d.Id, (dt.Name + ' van ') as Name " +
-                                 "FROM documents d, Scans s, DocumentTypes dt, Correspondents c, People p " +
-                                 "WHERE d.DocumentTypeId = dt.Id " +
-                                 "AND d.PersonId = p.Id " +
-                                 "AND d.CorrespondentId = c.Id " +
-                                 "AND s.Datum > curdate()";
+            const string query = "SELECT DISTINCT Id, Name\r\n" +
+                                 "FROM (\r\n" +
+                                 "    SELECT d.Id, CONCAT(DATE_FORMAT(d.Datum, \'%Y-%m-%e\'), \'  \', dt.Name, \' van \', c.Name, \' voor \', p.Name) as Name, s.Datum\r\n" +
+                                 "    FROM documents d, Scans s, DocumentTypes dt, Correspondents c, People p \r\n" +
+                                 "    WHERE d.DocumentTypeId = dt.Id \r\n" +
+                                 "    AND d.PersonId = p.Id \r\n" +
+                                 "    AND d.CorrespondentId = c.Id \r\n" +
+                                 "    AND s.DocumentId = d.Id\r\n" +
+                                 "    AND s.Datum > curdate()\r\n" +
+                                 "    order by s.Datum DESC\r\n" +
+                                 ") as tmp";
 
             using (var dbConnection = DatabaseHelper.GetConnection())
             {

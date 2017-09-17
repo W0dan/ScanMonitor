@@ -1,9 +1,11 @@
 ﻿using System;
 
-namespace ScanMonitor.Logic.ProcessDocument
+namespace ScanMonitor.Logic.NewScan
 {
-    public class NewDocumentCommand
+    public class NewScanCommand
     {
+        public Guid? DocumentId { get; set; }
+
         public string Filename { get; set; }
         public Guid DocumentTypeId { get; set; }
         public int PersonId { get; set; }

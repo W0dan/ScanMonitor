@@ -72,8 +72,8 @@
     <Compile Include="Database\SearchDocuments\DocumentDto.cs" />
     <Compile Include="Database\SearchDocuments\SearchDocumentsQuery.cs" />
     <Compile Include="Database\SearchDocuments\SearchDocumentsRequest.cs" />
-    <Compile Include="Logic\ProcessDocument\NewDocumentCommand.cs" />
-    <Compile Include="Logic\ProcessDocument\NewDocumentHandler.cs" />
+    <Compile Include="Logic\NewScan\NewScanCommand.cs" />
+    <Compile Include="Logic\NewScan\NewScanHandler.cs" />
     <Compile Include="ScannedFilesWatcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

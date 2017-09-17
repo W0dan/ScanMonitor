@@ -7,7 +7,7 @@ namespace ScanMonitor.Database.GetDocumentFolderInfo
     {
         public static DocumentDto Get(string id)
         {
-            const string query = "SELECT p.Name as Person, dt.Name as DocumentType, c.Name as Correspondent " +
+            const string query = "SELECT p.Name as Person, dt.Name as DocumentType, c.Name as Correspondent, d.Datum " +
                                  "FROM documents d, People p, DocumentTypes dt, Correspondents c " +
                                  "WHERE d.PersonId = p.Id " +
                                  "AND d.DocumentTypeId = dt.Id " +

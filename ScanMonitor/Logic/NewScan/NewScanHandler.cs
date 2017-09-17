@@ -4,21 +4,23 @@ using ScanMonitor.Database.CreateDocument;
 using ScanMonitor.Database.CreateScan;
 using ScanMonitor.Database.GetDocumentFolderInfo;
 
-namespace ScanMonitor.Logic.ProcessDocument
+namespace ScanMonitor.Logic.NewScan
 {
-    public static class NewDocumentHandler
+    public static class NewScanHandler
     {
-        public static void Handle(NewDocumentCommand command)
+        public static void Handle(NewScanCommand command)
         {
-            var documentId = InsertDocument(command);
+            var documentId = command.DocumentId.HasValue 
+                ? command.DocumentId?.ToString() 
+                : InsertDocument(command);
 
             var scannedDocumentId = Guid.NewGuid().ToString();
-            var destinationFilename = MoveDocumentToCorrectLocation(command, documentId, scannedDocumentId);
+            var destinationFilename = MoveDocumentToCorrectLocation(command.Filename, documentId, scannedDocumentId);
 
             InsertScannedFile(destinationFilename, documentId, scannedDocumentId);
         }
 
-        private static string MoveDocumentToCorrectLocation(NewDocumentCommand command, string documentId, string scannedDocumentId)
+        private static string MoveDocumentToCorrectLocation(string filename, string documentId, string scannedDocumentId)
         {
             var documentInfo = GetDocumentFolderInfoQuery.Get(documentId);
 
@@ -31,8 +33,8 @@ namespace ScanMonitor.Logic.ProcessDocument
 
             var documentType = documentInfo.DocumentType.Replace(" ", "_");
 
-            var scannedFile = new FileInfo(command.Filename);
-            var fileName = $"{command.Datum:yyyy-MM-dd}_{documentType}_{scannedDocumentId}{scannedFile.Extension}";
+            var scannedFile = new FileInfo(filename);
+            var fileName = $"{documentInfo.Datum:yyyy-MM-dd}_{documentType}_{scannedDocumentId}{scannedFile.Extension}";
             var destinationFilename = Path.Combine(folder.FullName, fileName);
 
             scannedFile.MoveTo(destinationFilename);
@@ -50,7 +52,7 @@ namespace ScanMonitor.Logic.ProcessDocument
             });
         }
 
-        private static string InsertDocument(NewDocumentCommand command)
+        private static string InsertDocument(NewScanCommand command)
         {
             var documentId = Guid.NewGuid().ToString();
             CreateDocumentQuery.Insert(new CreateDocumentCommand

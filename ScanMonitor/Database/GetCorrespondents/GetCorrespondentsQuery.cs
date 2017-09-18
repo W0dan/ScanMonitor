@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.GetCorrespondents
 {
@@ -8,7 +9,7 @@ namespace ScanMonitor.Database.GetCorrespondents
     {
         public static List<CorrespondentDto> List()
         {
-            using (var dbConnection = DatabaseHelper.GetConnection())
+            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
                 return dbConnection.Query<CorrespondentDto>("SELECT Id, Name FROM Correspondents").ToList();
         }
     }

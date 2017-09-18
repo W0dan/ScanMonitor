@@ -1,5 +1,6 @@
 ﻿using System;
 using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.CorrespondentToevoegen
 {
@@ -7,7 +8,7 @@ namespace ScanMonitor.Database.CorrespondentToevoegen
     {
         public static void Insert(CorrespondentToevoegenCommand command)
         {
-            using (var connection = DatabaseHelper.GetConnection())
+            using (var connection = AppConfig.Connections.ScanDbMySql)
             {
                 const string query = "INSERT INTO Correspondents(Id, Name) " +
                                      "VALUES(@Id, @Name)";

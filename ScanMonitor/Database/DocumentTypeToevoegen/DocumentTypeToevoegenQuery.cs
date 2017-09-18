@@ -1,5 +1,6 @@
 ﻿using System;
 using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.DocumentTypeToevoegen
 {
@@ -7,7 +8,7 @@ namespace ScanMonitor.Database.DocumentTypeToevoegen
     {
         public static void Insert(DocumentTypeToevoegenCommand command)
         {
-            using (var connection = DatabaseHelper.GetConnection())
+            using (var connection = AppConfig.Connections.ScanDbMySql)
             {
                 const string query = "INSERT INTO DocumentTypes(Id, Name) " +
                                      "VALUES(@Id, @Name)";

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.GetDocumentTypes
 {
@@ -8,7 +9,7 @@ namespace ScanMonitor.Database.GetDocumentTypes
     {
         public static List<DocumentTypeDto> List()
         {
-            using (var dbConnection = DatabaseHelper.GetConnection())
+            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
                 return dbConnection.Query<DocumentTypeDto>("SELECT Id, Name FROM DocumentTypes ORDER BY Name").ToList();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.GetDocumentsByToday
 {
@@ -20,7 +21,7 @@ namespace ScanMonitor.Database.GetDocumentsByToday
                                  "    order by s.Datum DESC\r\n" +
                                  ") as tmp";
 
-            using (var dbConnection = DatabaseHelper.GetConnection())
+            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
             {
                 return dbConnection.Query<DocumentDto>(query).ToList();
             }

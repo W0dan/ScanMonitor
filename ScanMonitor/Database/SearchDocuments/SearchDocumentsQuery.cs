@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.SearchDocuments
 {
@@ -53,7 +54,7 @@ namespace ScanMonitor.Database.SearchDocuments
                 $"{datumOntvangenFilter} " +
                 $"{searchStringFilter}";
 
-            using (var dbConnection = DatabaseHelper.GetConnection())
+            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
                 return dbConnection.Query<DocumentDto>(query, request).ToList();
         }
     }

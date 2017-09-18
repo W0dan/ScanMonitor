@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.GetDocumentFolderInfo
 {
@@ -14,7 +15,7 @@ namespace ScanMonitor.Database.GetDocumentFolderInfo
                                  "AND d.CorrespondentId = c.Id " +
                                  "AND d.Id = @id";
 
-            using (var dbConnection = DatabaseHelper.GetConnection())
+            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
             {
                 return dbConnection.Query<DocumentDto>(query, new { id }).Single();
             }

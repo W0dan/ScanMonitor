@@ -49,7 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettings.cs" />
+    <Compile Include="Config\AppConfig.cs" />
+    <Compile Include="Config\AppSettings.cs" />
+    <Compile Include="Config\Connections.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentCommand.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentQuery.cs" />
     <Compile Include="Database\CreateScan\CreateScanCommand.cs" />

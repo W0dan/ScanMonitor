@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ScanMonitor.Config;
 using ScanMonitor.Database.CreateDocument;
 using ScanMonitor.Database.CreateScan;
 using ScanMonitor.Database.GetDocumentFolderInfo;
@@ -24,7 +25,7 @@ namespace ScanMonitor.Logic.NewScan
         {
             var documentInfo = GetDocumentFolderInfoQuery.Get(documentId);
 
-            var destinationFolder = Path.Combine(AppSettings.RootDocumentPath, documentInfo.Person, documentInfo.Correspondent);
+            var destinationFolder = Path.Combine(AppConfig.AppSettings.RootDocumentPath, documentInfo.Person, documentInfo.Correspondent);
             var folder = new DirectoryInfo(destinationFolder);
             if (!folder.Exists)
             {

@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.CreateDocument
 {
@@ -6,7 +7,7 @@ namespace ScanMonitor.Database.CreateDocument
     {
         public static void Insert(CreateDocumentCommand command)
         {
-            using (var connection = DatabaseHelper.GetConnection())
+            using (var connection = AppConfig.Connections.ScanDbMySql)
             {
                 const string query = "INSERT INTO documents(Id, DocumentTypeId, PersonId, CorrespondentId, Datum, Description) " +
                                      "VALUES(@Id, @DocumentTypeId, @PersonId, @CorrespondentId, @Datum, @Description)";

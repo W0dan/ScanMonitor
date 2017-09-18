@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using ScanMonitor.Config;
 
 namespace ScanMonitor.UI
 {
@@ -22,7 +23,7 @@ namespace ScanMonitor.UI
 
         private void WaitForFiles(object sender, DoWorkEventArgs e)
         {
-            var watcher = ScannedFilesWatcher.StartWatching(@"H:\SCANS");
+            var watcher = ScannedFilesWatcher.StartWatching(AppConfig.AppSettings.ScanPath);
 
             foreach (var fileName in watcher.GetNextFile())
             {

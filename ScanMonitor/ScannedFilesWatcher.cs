@@ -36,10 +36,14 @@ namespace ScanMonitor
 
         private void FileCreated(object sender, FileSystemEventArgs e)
         {
-            if (_duplicateChecklist.Contains(e.FullPath))
+            var fi = new FileInfo(e.FullPath);
+
+            var uniqueName = e.FullPath + "_" + fi.CreationTimeUtc.ToString("yyyyMMdd_HHmmss,fff");
+
+            if (_duplicateChecklist.Contains(uniqueName))
                 return;
 
-            _duplicateChecklist.Add(e.FullPath);
+            _duplicateChecklist.Add(uniqueName);
             _scannedFiles.Add(e.FullPath);
         }
 

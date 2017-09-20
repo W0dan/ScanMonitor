@@ -13,6 +13,7 @@ using ScanMonitor.Database.GetDocumentsByToday;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Logic.NewScan;
+using ScanMonitor.Logic.RemoveScan;
 using ScanMonitor.UI.Dialogs;
 using ScanMonitor.UI.Extensions;
 using static ScanMonitor.UI.Extensions.TryExtensions;
@@ -153,7 +154,7 @@ namespace ScanMonitor.UI
 
         private void VerwijderenButton_OnClick(object sender, RoutedEventArgs e)
         {
-            // remove document from scans folder
+            RemoveScanHandler.Handle(new RemoveScanCommand { Filename = FileName });
 
             Close();
         }
@@ -263,6 +264,11 @@ namespace ScanMonitor.UI
             _correspondentDropdownItemsSource.Add(new CorrespondentDto { Id = command.Id, Name = command.Name });
 
             CorrespondentDropdown.SelectedValue = command.Id;
+        }
+
+        private void OverslaanButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

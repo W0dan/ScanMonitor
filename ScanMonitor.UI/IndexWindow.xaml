@@ -84,12 +84,14 @@
                     <ColumnDefinition Width="60*"></ColumnDefinition>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 
                 <Label Grid.ColumnSpan="3" Name="ValidationErrorsLabel" FontSize="16" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
                 
-                <Button Grid.Row="1" Grid.Column="1" Margin="10" Name="VerwijderenButton" Click="VerwijderenButton_OnClick">Verwijderen</Button>
-                <Button Grid.Row="1" Grid.Column="2" Margin="10" Name="ToevoegenButton" Click="ToevoegenButton_OnClick">Toevoegen</Button>
+                <Button Grid.Row="1" Grid.Column="1" Margin="10" Name="OverslaanButton" Click="OverslaanButton_OnClick">Overslaan</Button>
+                <Button Grid.Row="1" Grid.Column="2" Margin="10" Name="VerwijderenButton" Click="VerwijderenButton_OnClick">Verwijderen</Button>
+                <Button Grid.Row="1" Grid.Column="3" Margin="10" Name="ToevoegenButton" Click="ToevoegenButton_OnClick">Toevoegen</Button>
             </Grid>
 
             <RadioButton Grid.Row="0" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" Name="NewDocumentRadioButton" Checked="NewDocumentRadioButton_OnChecked">Nieuw document</RadioButton>

@@ -76,6 +76,8 @@
     <Compile Include="Database\SearchDocuments\SearchDocumentsRequest.cs" />
     <Compile Include="Logic\NewScan\NewScanCommand.cs" />
     <Compile Include="Logic\NewScan\NewScanHandler.cs" />
+    <Compile Include="Logic\RemoveScan\RemoveScanCommand.cs" />
+    <Compile Include="Logic\RemoveScan\RemoveScanHandler.cs" />
     <Compile Include="ScannedFilesWatcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,8 +86,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\RemoveDocument\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

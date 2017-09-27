@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanMonitor", "ScanMonitor\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanMonitor.UI", "ScanMonitor.UI\ScanMonitor.UI.csproj", "{413C49B0-3CC0-464B-8014-1FF67527E4FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{1D8024C1-7536-49AD-A3B9-F2B439CD34F7}"
+	ProjectSection(SolutionItems) = preProject
+		Database\CreateDatabase.sql = Database\CreateDatabase.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -123,9 +123,13 @@ namespace ScanMonitor.UI
 
         private void ShowImageFile()
         {
-            var image = new Image { Source = new BitmapImage(new Uri(FileName)) };
+            var scannedImage = new BitmapImage();
+            scannedImage.BeginInit();
+            scannedImage.CacheOption = BitmapCacheOption.OnLoad;
+            scannedImage.UriSource = new Uri(FileName);
+            scannedImage.EndInit();
 
-            LayoutGrid.Children.Add(image);
+            LayoutGrid.Children.Add(new Image { Source = scannedImage });
         }
 
         private void ShowPdfFile()

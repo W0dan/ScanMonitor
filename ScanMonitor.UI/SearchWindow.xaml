@@ -53,7 +53,13 @@
                 <DataGridTextColumn Header="Correspondent" Binding="{Binding Correspondent}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Datum ontvangen" Binding="{Binding DatumOntvangen}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Beschrijving" Binding="{Binding Beschrijving}"></DataGridTextColumn>
-                <DataGridHyperlinkColumn Header="Bestand" Binding="{Binding FileName}" Width="300"></DataGridHyperlinkColumn>
+                <DataGridHyperlinkColumn Header="Bestand" Binding="{Binding FileName}" Width="300">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="OnHyperlinkClicked"></EventSetter>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Documents;
 using ScanMonitor.Database.GetCorrespondents;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.GetPeople;
@@ -76,6 +78,12 @@ namespace ScanMonitor.UI
             var results = SearchDocumentsQuery.List(request);
 
             FoundItemsDataGrid.DataContext = new ObservableCollection<DocumentDto>(results);
+        }
+
+        private void OnHyperlinkClicked(object sender, RoutedEventArgs e)
+        {
+            var destination = ((Hyperlink)e.OriginalSource).NavigateUri;
+            Process.Start(destination.ToString());
         }
     }
 }

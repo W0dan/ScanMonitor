@@ -7,10 +7,10 @@ namespace ScanMonitor
 {
     public class ScannedFilesWatcher
     {
-        private readonly string _path;
-        private readonly HashSet<string> _duplicateChecklist = new HashSet<string>();
-        private readonly BlockingCollection<string> _scannedFiles = new BlockingCollection<string>();
-        private FileSystemWatcher _fsw;
+        private readonly string path;
+        private readonly HashSet<string> duplicateChecklist = new HashSet<string>();
+        private readonly BlockingCollection<string> scannedFiles = new BlockingCollection<string>();
+        private FileSystemWatcher fileSystemWatcher;
 
         public static ScannedFilesWatcher StartWatching(string path)
         {
@@ -19,37 +19,45 @@ namespace ScanMonitor
 
         private ScannedFilesWatcher(string path)
         {
-            _path = path;
+            this.path = path;
 
             ThreadPool.QueueUserWorkItem(Start);
         }
 
         private void Start(object state)
         {
-            _fsw = new FileSystemWatcher(_path)
+            fileSystemWatcher = new FileSystemWatcher(path)
             {
                 EnableRaisingEvents = true
             };
 
-            _fsw.Created += FileCreated;
+            fileSystemWatcher.Created += FileCreated;
         }
 
         private void FileCreated(object sender, FileSystemEventArgs e)
         {
+            if (!CanProcessFile(e))
+                return;
+
             var fi = new FileInfo(e.FullPath);
 
             var uniqueName = e.FullPath + "_" + fi.CreationTimeUtc.ToString("yyyyMMdd_HHmmss,fff");
 
-            if (_duplicateChecklist.Contains(uniqueName))
+            if (duplicateChecklist.Contains(uniqueName))
                 return;
 
-            _duplicateChecklist.Add(uniqueName);
-            _scannedFiles.Add(e.FullPath);
+            duplicateChecklist.Add(uniqueName);
+            scannedFiles.Add(e.FullPath);
+        }
+
+        private static bool CanProcessFile(FileSystemEventArgs e)
+        {
+            return !e.FullPath.Contains(".tmp");
         }
 
         public IEnumerable<string> GetNextFile()
         {
-            foreach (var scannedFile in _scannedFiles.GetConsumingEnumerable())
+            foreach (var scannedFile in scannedFiles.GetConsumingEnumerable())
             {
                 yield return scannedFile;
             }

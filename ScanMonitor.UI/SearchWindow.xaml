@@ -51,7 +51,7 @@
                 <DataGridTextColumn Header="DocumentType" Binding="{Binding DocumentType}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Voor wie ?" Binding="{Binding VoorWie}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Correspondent" Binding="{Binding Correspondent}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Datum ontvangen" Binding="{Binding DatumOntvangen}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Datum ontvangen" Binding="{Binding DatumOntvangen, StringFormat=\{0:dd/MM/yyyy\}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Beschrijving" Binding="{Binding Beschrijving}"></DataGridTextColumn>
                 <DataGridHyperlinkColumn Header="Bestand" Binding="{Binding FileName}" Width="300">
                     <DataGridHyperlinkColumn.ElementStyle>

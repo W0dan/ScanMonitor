@@ -2,7 +2,13 @@
 {
     public static class AppConfig
     {
-        public static AppSettings AppSettings => new AppSettings();
-        public static Connections Connections => new Connections();
+        static AppConfig()
+        {
+            AppSettings = new AppSettings();
+            Connections = new Connections();
+        }
+
+        public static readonly AppSettings AppSettings;
+        public static readonly Connections Connections;
     }
 }

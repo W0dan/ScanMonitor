@@ -8,7 +8,7 @@ namespace ScanMonitor.Database.DocumentTypeToevoegen
     {
         public static void Insert(DocumentTypeToevoegenCommand command)
         {
-            using (var connection = AppConfig.Connections.ScanDbMySql)
+            using (var connection = AppConfig.Connections.ScanDbConnection)
             {
                 const string query = "INSERT INTO DocumentTypes(Id, Name) " +
                                      "VALUES(@Id, @Name)";

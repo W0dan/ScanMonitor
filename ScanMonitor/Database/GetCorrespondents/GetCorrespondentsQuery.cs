@@ -9,7 +9,7 @@ namespace ScanMonitor.Database.GetCorrespondents
     {
         public static List<CorrespondentDto> List()
         {
-            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
+            using (var dbConnection = AppConfig.Connections.ScanDbConnection)
                 return dbConnection.Query<CorrespondentDto>("SELECT Id, Name FROM Correspondents ORDER BY Name").ToList();
         }
     }

@@ -9,7 +9,7 @@ namespace ScanMonitor.Database.GetDocumentTypes
     {
         public static List<DocumentTypeDto> List()
         {
-            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
+            using (var dbConnection = AppConfig.Connections.ScanDbConnection)
                 return dbConnection.Query<DocumentTypeDto>("SELECT Id, Name FROM DocumentTypes ORDER BY Name").ToList();
         }
     }

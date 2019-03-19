@@ -9,7 +9,7 @@ namespace ScanMonitor.Database.GetPeople
     {
         public static List<PersonDto> List()
         {
-            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
+            using (var dbConnection = AppConfig.Connections.ScanDbConnection)
                 return dbConnection.Query<PersonDto>("SELECT Id, Name FROM People").ToList();
         }
     }

@@ -54,7 +54,7 @@ namespace ScanMonitor.Database.SearchDocuments
                 $"{datumOntvangenFilter} " +
                 $"{searchStringFilter}";
 
-            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
+            using (var dbConnection = AppConfig.Connections.ScanDbConnection)
                 return dbConnection.Query<DocumentDto>(query, request).ToList();
         }
     }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanMonitor", "ScanMonitor\ScanMonitor.csproj", "{6408CA5E-9B6B-45FF-A7DE-BCD3C302BD26}"
 EndProject
@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{1D8024C1-7536-49AD-A3B9-F2B439CD34F7}"
 	ProjectSection(SolutionItems) = preProject
 		Database\CreateDatabase.sql = Database\CreateDatabase.sql
+		Database\CreateDatabase_sqlserver.sql = Database\CreateDatabase_sqlserver.sql
 	EndProjectSection
 EndProject
 Global

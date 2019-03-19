@@ -15,7 +15,7 @@ namespace ScanMonitor.Database.GetDocumentFolderInfo
                                  "AND d.CorrespondentId = c.Id " +
                                  "AND d.Id = @id";
 
-            using (var dbConnection = AppConfig.Connections.ScanDbMySql)
+            using (var dbConnection = AppConfig.Connections.ScanDbConnection)
             {
                 return dbConnection.Query<DocumentDto>(query, new { id }).Single();
             }

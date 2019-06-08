@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Input;
 using ScanMonitor.Database.GetCorrespondents;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.GetPeople;
@@ -84,6 +85,11 @@ namespace ScanMonitor.UI
         {
             var destination = ((Hyperlink)e.OriginalSource).NavigateUri;
             Process.Start(destination.ToString());
+        }
+
+        private void OnDeleteClicked(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

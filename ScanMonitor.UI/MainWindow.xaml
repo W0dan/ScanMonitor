@@ -28,6 +28,11 @@
                 <Separator></Separator>
                 <MenuItem Header="_Exit" Click="ExitMenuItem_OnClick"></MenuItem>
             </MenuItem>
+            <MenuItem Header="_Admin" FontSize="16">
+                <MenuItem Header="Users" Click="AdminUsersMenuItem_OnClick"></MenuItem>
+                <MenuItem Header="Document types" Click="AdminDocumentTypesMenuItem_OnClick"></MenuItem>
+                <MenuItem Header="Correspondents" Click="AdminCorrespondentsMenuItem_OnClick"></MenuItem>
+            </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1" Grid.Column="0" Name="ProcessedFiles"></StackPanel>
     </Grid>

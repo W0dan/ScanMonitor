@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,8 +21,8 @@ namespace ScanMonitor.UI
 {
     public partial class IndexWindow : Window
     {
-        private ObservableCollection<CorrespondentDto> _correspondentDropdownItemsSource;
-        private ObservableCollection<DocumentTypeDto> _documentTypeDropdownItemsSource;
+        private ObservableCollection<CorrespondentDto> correspondentDropdownItemsSource;
+        private ObservableCollection<DocumentTypeDto> documentTypeDropdownItemsSource;
         private string FileName { get; set; }
 
         public IndexWindow()
@@ -72,8 +71,8 @@ namespace ScanMonitor.UI
 
         private void LoadCorrespondents()
         {
-            _correspondentDropdownItemsSource = new ObservableCollection<CorrespondentDto>(GetCorrespondentsQuery.List());
-            CorrespondentDropdown.ItemsSource = _correspondentDropdownItemsSource;
+            correspondentDropdownItemsSource = new ObservableCollection<CorrespondentDto>(GetCorrespondentsQuery.List());
+            CorrespondentDropdown.ItemsSource = correspondentDropdownItemsSource;
             CorrespondentDropdown.DisplayMemberPath = nameof(DocumentTypeDto.Name);
             CorrespondentDropdown.SelectedValuePath = nameof(DocumentTypeDto.Id);
         }
@@ -88,8 +87,8 @@ namespace ScanMonitor.UI
 
         private void LoadDocumentTypes()
         {
-            _documentTypeDropdownItemsSource = new ObservableCollection<DocumentTypeDto>(GetDocumentTypesQuery.List());
-            DocumentTypeDropdown.ItemsSource = _documentTypeDropdownItemsSource;
+            documentTypeDropdownItemsSource = new ObservableCollection<DocumentTypeDto>(GetDocumentTypesQuery.List());
+            DocumentTypeDropdown.ItemsSource = documentTypeDropdownItemsSource;
             DocumentTypeDropdown.DisplayMemberPath = nameof(DocumentTypeDto.Name);
             DocumentTypeDropdown.SelectedValuePath = nameof(DocumentTypeDto.Id);
         }
@@ -252,7 +251,7 @@ namespace ScanMonitor.UI
             var command = new DocumentTypeToevoegenCommand { Id = Guid.NewGuid().ToString(), Name = newDocumentType };
             DocumentTypeToevoegenQuery.Insert(command);
 
-            _documentTypeDropdownItemsSource.Add(new DocumentTypeDto { Id = command.Id, Name = command.Name });
+            documentTypeDropdownItemsSource.Add(new DocumentTypeDto { Id = command.Id, Name = command.Name });
 
             DocumentTypeDropdown.SelectedValue = command.Id;
         }
@@ -265,7 +264,7 @@ namespace ScanMonitor.UI
             var command = new CorrespondentToevoegenCommand { Id = Guid.NewGuid().ToString(), Name = newCorrespondent };
             CorrespondentToevoegenQuery.Insert(command);
 
-            _correspondentDropdownItemsSource.Add(new CorrespondentDto { Id = command.Id, Name = command.Name });
+            correspondentDropdownItemsSource.Add(new CorrespondentDto { Id = command.Id, Name = command.Name });
 
             CorrespondentDropdown.SelectedValue = command.Id;
         }

@@ -59,6 +59,8 @@
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenCommand.cs" />
     <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenQuery.cs" />
+    <Compile Include="Database\DeleteDocument\DeleteDocumentQuery.cs" />
+    <Compile Include="Database\DeleteDocument\DeleteDocumentCommand.cs" />
     <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenCommand.cs" />
     <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenQuery.cs" />
     <Compile Include="Database\GetCorrespondents\CorrespondentDto.cs" />

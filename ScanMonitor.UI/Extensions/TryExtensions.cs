@@ -5,11 +5,13 @@ namespace ScanMonitor.UI.Extensions
 {
     public class TryExtensions
     {
-        private readonly Action _action;
+        private readonly Action action;
+        private int timesTried;
+        private Exception exception;
 
         private TryExtensions(Action action)
         {
-            _action = action;
+            this.action = action;
         }
 
         public static TryExtensions Try(Action action)
@@ -17,9 +19,10 @@ namespace ScanMonitor.UI.Extensions
             return new TryExtensions(action);
         }
 
-        public void Times(int count)
+        public TryExtensions Times(int count)
         {
-            var timesTried = 0;
+            timesTried = 0;
+            exception = null;
 
             Console.WriteLine("trying the action for the first time");
 
@@ -27,17 +30,38 @@ namespace ScanMonitor.UI.Extensions
             {
                 try
                 {
-                    _action();
-                    return;
+                    action();
+                    return this;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     timesTried++;
+                    exception = ex;
 
                     Console.WriteLine("exception occured, retrying after 200ms");
                     Thread.Sleep(200);
                 }
             }
+
+            return this;
+        }
+
+        public TryExtensions OnSuccess(Action<int> successAction)
+        {
+            if (exception == null)
+            {
+                successAction(timesTried);
+            }
+            return this;
+        }
+
+        public TryExtensions OnFailure(Action<Exception, int> failureAction)
+        {
+            if (exception != null)
+            {
+                failureAction(exception, timesTried);
+            }
+            return this;
         }
     }
 }

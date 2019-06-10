@@ -5,14 +5,19 @@ namespace ScanMonitor.Database.DeleteDocument
 {
     public class DeleteDocumentQuery
     {
-        public static void Insert(DeleteDocumentCommand command)
+        public static void Delete(DeleteDocumentCommand command)
         {
             using (var connection = AppConfig.Connections.ScanDbConnection)
             {
-                const string query = "DELETE FROM documents " +
+                const string deleteScansQuery = "DELETE FROM Scans " +
+                                                "WHERE DocumentId = @Id";
+
+                connection.Execute(deleteScansQuery, command);
+
+                const string deleteDocumentQuery = "DELETE FROM documents " +
                                      "WHERE Id = @Id";
 
-                connection.Execute(query, command);
+                connection.Execute(deleteDocumentQuery, command);
             }
         }
     }

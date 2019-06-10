@@ -1,5 +1,4 @@
-﻿using System;
-using Dapper;
+﻿using Dapper;
 using ScanMonitor.Config;
 
 namespace ScanMonitor.Database.CorrespondentToevoegen

@@ -52,6 +52,10 @@
     <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Config\AppSettings.cs" />
     <Compile Include="Config\Connections.cs" />
+    <Compile Include="Database\CorrespondentAanpassen\CorrespondentAanpassenCommand.cs" />
+    <Compile Include="Database\CorrespondentAanpassen\CorrespondentAanpassenQuery.cs" />
+    <Compile Include="Database\CorrespondentVerwijderen\CorrespondentVerwijderenCommand.cs" />
+    <Compile Include="Database\CorrespondentVerwijderen\CorrespondentVerwijderenQuery.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentCommand.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentQuery.cs" />
     <Compile Include="Database\CreateScan\CreateScanCommand.cs" />
@@ -59,12 +63,16 @@
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenCommand.cs" />
     <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenQuery.cs" />
+    <Compile Include="Database\DeleteDocument\DeleteDocumentHandler.cs" />
     <Compile Include="Database\DeleteDocument\DeleteDocumentQuery.cs" />
     <Compile Include="Database\DeleteDocument\DeleteDocumentCommand.cs" />
     <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenCommand.cs" />
     <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenQuery.cs" />
     <Compile Include="Database\GetCorrespondents\CorrespondentDto.cs" />
     <Compile Include="Database\GetCorrespondents\GetCorrespondentsQuery.cs" />
+    <Compile Include="Database\GetDocumentById\DocumentDto.cs" />
+    <Compile Include="Database\GetDocumentById\GetDocumentByIdQuery.cs" />
+    <Compile Include="Database\GetDocumentById\GetDocumentByIdRequest.cs" />
     <Compile Include="Database\GetDocumentFolderInfo\DocumentDto.cs" />
     <Compile Include="Database\GetDocumentFolderInfo\GetDocumentFolderInfoQuery.cs" />
     <Compile Include="Database\GetDocumentsByToday\DocumentDto.cs" />
@@ -76,6 +84,7 @@
     <Compile Include="Database\SearchDocuments\DocumentDto.cs" />
     <Compile Include="Database\SearchDocuments\SearchDocumentsQuery.cs" />
     <Compile Include="Database\SearchDocuments\SearchDocumentsRequest.cs" />
+    <Compile Include="Exceptions\ScanMonitorException.cs" />
     <Compile Include="Logic\NewScan\NewScanCommand.cs" />
     <Compile Include="Logic\NewScan\NewScanHandler.cs" />
     <Compile Include="Logic\RemoveScan\RemoveScanCommand.cs" />
@@ -88,6 +97,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Database\DocumentTypeAanpassen\" />
+    <Folder Include="Database\DocumentTypeVerwijderen\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using ScanMonitor.Database.DeleteDocument;
 using ScanMonitor.Database.GetCorrespondents;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Database.SearchDocuments;
+using ScanMonitor.Exceptions;
 
 namespace ScanMonitor.UI
 {
@@ -72,7 +74,7 @@ namespace ScanMonitor.UI
             {
                 CorrespondentId = (string)CorrespondentDropdown.SelectedValue,
                 DocumentTypeId = (string)DocumentTypeDropdown.SelectedValue,
-                PersonId = (int?)VoorWieDropdown.SelectedValue,
+                PersonId = (string)VoorWieDropdown.SelectedValue,
                 Datum = DatumOntvangenDatePicker.SelectedDate,
                 SearchString = DescriptionTextbox.Text
             };
@@ -89,7 +91,33 @@ namespace ScanMonitor.UI
 
         private void OnDeleteClicked(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            var document = (DocumentDto)((FrameworkElement)sender).DataContext;
+
+            var result = MessageBox.Show($"Ben je zeker dat je document {document.Beschrijving} van " +
+                            $"{document.Correspondent} voor {document.VoorWie} op datum " +
+                            $"{document.DatumOntvangen:dd-MM-yyy} en álle daaraan gerelateerde scans " +
+                            $"wil verwijderen ?",
+                            "Document verwijderen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.No) return;
+
+            var warnings = DeleteDocumentHandler.Handle(new DeleteDocumentCommand
+            {
+                Id = document.Id
+            });
+
+            var dataContext = (ObservableCollection<DocumentDto>)FoundItemsDataGrid.DataContext;
+            foreach (var doc in dataContext)
+                if (doc.Id == document.Id)
+                    dataContext.Remove(doc);
+
+            if (!warnings.Any()) return;
+
+            var message = warnings
+                .Aggregate("Sommige bestanden konden niet verwijderd worden:\n",
+                (current, warning) => $"{current}-{warning}\n");
+
+            throw new ScanMonitorException(message);
         }
     }
 }

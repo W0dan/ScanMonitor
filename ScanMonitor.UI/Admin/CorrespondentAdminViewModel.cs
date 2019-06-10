@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using ScanMonitor.Database.CorrespondentAanpassen;
 using ScanMonitor.Database.CorrespondentToevoegen;
+using ScanMonitor.Database.CorrespondentVerwijderen;
 using ScanMonitor.Database.GetCorrespondents;
 using ScanMonitor.Database.SearchDocuments;
 
@@ -30,19 +33,26 @@ namespace ScanMonitor.UI.Admin
         {
             CorrespondentToevoegenQuery.Insert(new CorrespondentToevoegenCommand
             {
-                Id = (string)item.Id,
+                Id = Guid.NewGuid().ToString(),
                 Name = item.Name
             });
         }
 
         protected override void UpdateItem(AdminItem item)
         {
-            // todo
+            CorrespondentAanpassenQuery.Update(new CorrespondentAanpassenCommand
+            {
+                Id = item.Id,
+                Name = item.Name
+            });
         }
 
         protected override void DeleteItem(AdminItem item)
         {
-            // todo
+            CorrespondentVerwijderenQuery.Delete(new CorrespondentVerwijderenCommand
+            {
+                Id = item.Id
+            });
         }
     }
 }

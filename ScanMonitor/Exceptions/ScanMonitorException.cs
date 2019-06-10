@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScanMonitor.UI.Exceptions
+namespace ScanMonitor.Exceptions
 {
     public class ScanMonitorException : Exception
     {

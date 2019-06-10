@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
-using ScanMonitor.UI.Exceptions;
+using ScanMonitor.Exceptions;
 
 namespace ScanMonitor.UI
 {

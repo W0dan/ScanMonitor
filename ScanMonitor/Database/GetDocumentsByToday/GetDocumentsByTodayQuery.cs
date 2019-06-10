@@ -23,7 +23,7 @@ namespace ScanMonitor.Database.GetDocumentsByToday
                             "   inner join documenttypes dt on dt.Id = d.DocumentTypeId\r\n" +
                             "   inner join correspondents c on d.CorrespondentId = c.Id\r\n" +
                             "   inner join People p on d.PersonId = p.Id\r\n" +
-                            "   where s.Datum > GETDATE()\r\n" +
+                            $"   where s.Datum > '{DateTime.Now:yyyy-MM-dd}'\r\n" +
                             "   order by s.Datum\r\n" +
                             ") as tmp";
                     break;

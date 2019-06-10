@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Controls;
-using ScanMonitor.Database.DocumentTypeToevoegen;
-using ScanMonitor.UI.Exceptions;
+using ScanMonitor.Exceptions;
 
 namespace ScanMonitor.UI.Admin
 {
@@ -37,46 +35,78 @@ namespace ScanMonitor.UI.Admin
 
         public void Save()
         {
-            // todo: save the collection
-            var itemsToAdd = new List<AdminItem>();
-            var itemsToUpdate = new List<AdminItem>();
-            var itemsToDelete = new List<AdminItem>();
+            Insert();
+            Update();
+            Delete();
 
+            //var itemsToAdd = new List<AdminItem>();
+            //var itemsToUpdate = new List<AdminItem>();
+            //var itemsToDelete = new List<AdminItem>();
+
+            //foreach (var item in Items)
+            //{
+            //    if (item.Id == null)
+            //    {
+            //        itemsToAdd.Add(item);
+            //        continue;
+            //    }
+            //}
+            //foreach (var item in Items)
+            //{
+            //    if (OriginalItems.Any(x => x.Id == item.Id && x.Name != item.Name))
+            //    {
+            //        itemsToUpdate.Add(item);
+            //        continue;
+            //    }
+            //}
+
+            //foreach (var item in OriginalItems)
+            //{
+            //    if (!Items.Any(x => x.Id == item.Id))
+            //    {
+            //        itemsToDelete.Add(item);
+            //    }
+            //}
+
+            //foreach (var itemToAdd in itemsToAdd)
+            //{
+            //    AddItem(itemToAdd);
+            //}
+            //foreach (var itemToUpdate in itemsToUpdate)
+            //{
+            //    UpdateItem(itemToUpdate);
+            //}
+            //foreach (var itemToDelete in itemsToDelete)
+            //{
+            //    DeleteItem(itemToDelete);
+            //}
+        }
+
+        private void Insert()
+        {
+            foreach (var item in Items.Where(x => x.Id == null))
+                AddItem(item);
+        }
+
+        private void Update()
+        {
             foreach (var item in Items)
             {
-                if (item.Id == null)
-                {
-                    itemsToAdd.Add(item);
-                    continue;
-                }
                 if (OriginalItems.Any(x => x.Id == item.Id && x.Name != item.Name))
                 {
-                    itemsToUpdate.Add(item);
-                    continue;
+                    UpdateItem(item);
                 }
             }
+        }
 
+        private void Delete()
+        {
             foreach (var item in OriginalItems)
             {
                 if (!Items.Any(x => x.Id == item.Id))
                 {
-                    itemsToDelete.Add(item);
+                    DeleteItem(item);
                 }
-            }
-
-            foreach (var itemToAdd in itemsToAdd)
-            {
-                AddItem(itemToAdd);
-            }
-            foreach (var itemToUpdate in itemsToUpdate)
-            {
-                // todo: update items
-                UpdateItem(itemToUpdate);
-            }
-            foreach (var itemToDelete in itemsToDelete)
-            {
-                // todo: delete items
-                DeleteItem(itemToDelete);
             }
         }
 

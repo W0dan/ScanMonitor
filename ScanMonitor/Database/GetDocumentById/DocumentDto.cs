@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ScanMonitor.Database.SearchDocuments
+namespace ScanMonitor.Database.GetDocumentById
 {
     public class DocumentDto
     {
@@ -10,6 +11,14 @@ namespace ScanMonitor.Database.SearchDocuments
         public string Correspondent { get; set; }
         public DateTime DatumOntvangen { get; set; }
         public string Beschrijving { get; set; }
-        public string FileName { get; set; }
+
+        public List<ScanDto> Scans { get; set; }
+    }
+
+    public class ScanDto
+    {
+        public string Id { get; set; }
+        public string Filename { get; set; }
+        public DateTime Datum { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace ScanMonitor.Database.SearchDocuments
             }
             if (request.PersonId != null)
             {
-                voorWieFilter = $"AND p.Id = {request.PersonId} ";
+                voorWieFilter = $"AND p.Id = '{request.PersonId}' ";
             }
             if (request.CorrespondentId != null)
             {
@@ -42,7 +42,7 @@ namespace ScanMonitor.Database.SearchDocuments
             }
 
             var query =
-                "SELECT dt.Name as DocumentType, p.Name as VoorWie, c.Name as Correspondent, d.Datum as DatumOntvangen, d.Description as Beschrijving, s.FileName " +
+                "SELECT d.Id, dt.Name as DocumentType, p.Name as VoorWie, c.Name as Correspondent, d.Datum as DatumOntvangen, d.Description as Beschrijving, s.FileName " +
                 "FROM documents d, DocumentTypes dt, Correspondents c, People p, Scans s " +
                 "WHERE d.DocumentTypeId = dt.Id " +
                 "AND d.CorrespondentId = c.Id " +

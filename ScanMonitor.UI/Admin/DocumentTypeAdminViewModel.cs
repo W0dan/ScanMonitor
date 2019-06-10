@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using ScanMonitor.Database.DocumentTypeToevoegen;
 using ScanMonitor.Database.GetDocumentTypes;
@@ -30,7 +31,7 @@ namespace ScanMonitor.UI.Admin
         {
             DocumentTypeToevoegenQuery.Insert(new DocumentTypeToevoegenCommand
             {
-                Id = (string)item.Id,
+                Id = Guid.NewGuid().ToString(),
                 Name = item.Name
             });
         }

@@ -8,15 +8,12 @@
         Title="Search documents" Height="600" Width="900"
         WindowStartupLocation="CenterOwner"
         Loaded="SearchWindow_OnLoaded">
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
@@ -24,29 +21,27 @@
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="1" Grid.Column="1" FontSize="16" Name="DocumentTypeLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Document type:</Label>
-        <ComboBox Grid.Row="1" Grid.Column="2" FontSize="16" Name="DocumentTypeDropdown" VerticalAlignment="Center"></ComboBox>
+        <Label Grid.Row="0" Grid.Column="0" FontSize="16" Name="DocumentTypeLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Document type:</Label>
+        <ComboBox Grid.Row="0" Grid.Column="1" FontSize="16" Name="DocumentTypeDropdown" VerticalAlignment="Center"></ComboBox>
 
-        <Label Grid.Row="2" Grid.Column="1" FontSize="16" Name="VoorWieLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Voor wie:</Label>
-        <ComboBox Grid.Row="2" Grid.Column="2" FontSize="16" Name="VoorWieDropdown" VerticalAlignment="Center"></ComboBox>
+        <Label Grid.Row="1" Grid.Column="0" FontSize="16" Name="VoorWieLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Voor wie:</Label>
+        <ComboBox Grid.Row="1" Grid.Column="1" FontSize="16" Name="VoorWieDropdown" VerticalAlignment="Center"></ComboBox>
 
-        <Label Grid.Row="3" Grid.Column="1" FontSize="16" Name="CorrespondentLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Correspondent (Van wie):</Label>
-        <ComboBox Grid.Row="3" Grid.Column="2" FontSize="16" Name="CorrespondentDropdown" VerticalAlignment="Center"></ComboBox>
+        <Label Grid.Row="2" Grid.Column="0" FontSize="16" Name="CorrespondentLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Correspondent (Van wie):</Label>
+        <ComboBox Grid.Row="2" Grid.Column="1" FontSize="16" Name="CorrespondentDropdown" VerticalAlignment="Center"></ComboBox>
 
-        <Label Grid.Row="4" Grid.Column="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Datum ontvangen:</Label>
-        <DatePicker Grid.Row="4" Grid.Column="2" FontSize="16" Name="DatumOntvangenDatePicker" VerticalAlignment="Center"></DatePicker>
+        <Label Grid.Row="3" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Datum ontvangen:</Label>
+        <DatePicker Grid.Row="3" Grid.Column="1" FontSize="16" Name="DatumOntvangenDatePicker" VerticalAlignment="Center"></DatePicker>
 
-        <Label Grid.Row="5" Grid.Column="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Zoekterm:</Label>
-        <TextBox Grid.Row="5" Grid.Column="2" FontSize="16" Name="DescriptionTextbox" VerticalAlignment="Center"></TextBox>
+        <Label Grid.Row="4" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Zoekterm:</Label>
+        <TextBox Grid.Row="4" Grid.Column="1" FontSize="16" Name="DescriptionTextbox" VerticalAlignment="Center"></TextBox>
 
-        <Button Grid.Row="6" Grid.Column="2" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="Images/Symbols Find.ico"></Image></Button>
+        <Button Grid.Row="5" Grid.Column="1" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="Images/Symbols Find.ico"></Image></Button>
         
-        <!--<StackPanel Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Name="FoundItemsStackPanel"></StackPanel>-->
-        <DataGrid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}">
+        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DocumentType" Binding="{Binding DocumentType}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Voor wie ?" Binding="{Binding VoorWie}"></DataGridTextColumn>

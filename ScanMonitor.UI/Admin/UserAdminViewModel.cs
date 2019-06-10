@@ -20,7 +20,7 @@ namespace ScanMonitor.UI.Admin
 
         protected override bool CanBeDeleted(AdminItem item)
         {
-            return !SearchDocumentsQuery.List(new SearchDocumentsRequest { PersonId = (int)item.Id }).Any();
+            return !SearchDocumentsQuery.List(new SearchDocumentsRequest { PersonId = item.Id }).Any();
         }
 
         protected override string Message => "Gebruiker kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die behoren to deze gebruiker.";

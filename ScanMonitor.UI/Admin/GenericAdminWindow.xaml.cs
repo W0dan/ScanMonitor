@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace ScanMonitor.UI.Admin
@@ -29,17 +27,6 @@ namespace ScanMonitor.UI.Admin
             window.ShowDialog();
         }
 
-        private void OnEditClicked(object sender, MouseButtonEventArgs e)
-        {
-            var clickedItem = ((FrameworkElement)sender).DataContext as AdminItem;
-
-            var name = clickedItem?.Name ?? "null";
-
-            Debug.WriteLine(name);
-
-            throw new NotImplementedException();
-        }
-
         private void OnDeleteClicked(object sender, MouseButtonEventArgs e)
         {
             var clickedItem = ((FrameworkElement)sender).DataContext as AdminItem;
@@ -47,9 +34,9 @@ namespace ScanMonitor.UI.Admin
             Model.Delete(clickedItem);
         }
 
-        private void OnAddClicked(object sender, RoutedEventArgs e)
+        private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Model.Save();
         }
     }
 }

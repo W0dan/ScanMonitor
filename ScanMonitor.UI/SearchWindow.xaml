@@ -46,7 +46,7 @@
         <Button Grid.Row="6" Grid.Column="2" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="Images/Symbols Find.ico"></Image></Button>
         
         <!--<StackPanel Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Name="FoundItemsStackPanel"></StackPanel>-->
-        <DataGrid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}">
+        <DataGrid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DocumentType" Binding="{Binding DocumentType}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Voor wie ?" Binding="{Binding VoorWie}"></DataGridTextColumn>
@@ -60,7 +60,7 @@
                         </Style>
                     </DataGridHyperlinkColumn.ElementStyle>
                 </DataGridHyperlinkColumn>
-                <DataGridTemplateColumn Header="Delete"  MinWidth="50" MaxWidth="50">
+                <DataGridTemplateColumn Header=""  MinWidth="50" MaxWidth="50">
                     <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <EventSetter Event="PreviewMouseLeftButtonDown"

@@ -19,20 +19,8 @@
 
         <DataGrid Grid.Row="0" Grid.Column="0" Name="ItemsGrid" AutoGenerateColumns="False" ItemsSource="{Binding Items}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Edit"  MinWidth="50" MaxWidth="50">
-                    <DataGridTemplateColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnEditClicked"/>
-                        </Style>
-                    </DataGridTemplateColumn.CellStyle>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Height="16px" Width="16px" Source="../Images/pen.ico" Cursor="Hand" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Delete"  MinWidth="50" MaxWidth="50">
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                <DataGridTemplateColumn Header=""  MinWidth="50" MaxWidth="50">
                     <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnDeleteClicked"/>
@@ -46,6 +34,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0 10 0 0" Width="100px" Name="AddButton" Click="OnAddClicked">Add</Button>
+        <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0 10 0 0" Width="100px" Name="AddButton" Click="OnSaveClicked">Save</Button>
     </Grid>
 </Window>

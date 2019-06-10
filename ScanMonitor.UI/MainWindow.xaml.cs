@@ -1,10 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using ScanMonitor.Config;
-using ScanMonitor.Database.GetPeople;
 using ScanMonitor.UI.Admin;
 
 namespace ScanMonitor.UI
@@ -46,33 +43,16 @@ namespace ScanMonitor.UI
             Close();
         }
 
-        private void SearchMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            SearchWindow.StartSearch(this);
-        }
+        private void SearchMenuItem_OnClick(object sender, RoutedEventArgs e) 
+            => SearchWindow.StartSearch(this);
 
-        private void AdminUsersMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            var people = GetPeopleQuery.List()
-                .Select(x => new AdminItem { Id = x.Id, Name = x.Name });
+        private void AdminUsersMenuItem_OnClick(object sender, RoutedEventArgs e) 
+            => GenericAdminWindow.ShowAdmin(this, new UserAdminViewModel());
 
-            var model = new GenericAdminViewModel
-            {
-                Items = new ObservableCollection<AdminItem>(people),
-                Title = "Gebruikers beheer"
-            };
+        private void AdminDocumentTypesMenuItem_OnClick(object sender, RoutedEventArgs e) 
+            => GenericAdminWindow.ShowAdmin(this, new DocumentTypeAdminViewModel());
 
-            GenericAdminWindow.ShowAdmin(this, model);
-        }
-
-        private void AdminCorrespondentsMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void AdminDocumentTypesMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
+        private void AdminCorrespondentsMenuItem_OnClick(object sender, RoutedEventArgs e) 
+            => GenericAdminWindow.ShowAdmin(this, new CorrespondentAdminViewModel());
     }
 }

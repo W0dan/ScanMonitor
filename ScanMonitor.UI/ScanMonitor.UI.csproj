@@ -70,10 +70,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Admin\AdminItem.cs" />
+    <Compile Include="Admin\CorrespondentAdminViewModel.cs" />
+    <Compile Include="Admin\DocumentTypeAdminViewModel.cs" />
     <Compile Include="Admin\GenericAdminViewModel.cs" />
     <Compile Include="Admin\GenericAdminWindow.xaml.cs">
       <DependentUpon>GenericAdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\UserAdminViewModel.cs" />
+    <Compile Include="Exceptions\ScanMonitorException.cs" />
     <Compile Include="SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>

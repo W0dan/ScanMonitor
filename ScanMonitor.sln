@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{1D
 		Database\CreateDatabase_sqlserver.sql = Database\CreateDatabase_sqlserver.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{E064807C-E7A6-4248-A733-E67A880DF556}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{413C49B0-3CC0-464B-8014-1FF67527E4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{413C49B0-3CC0-464B-8014-1FF67527E4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{413C49B0-3CC0-464B-8014-1FF67527E4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E064807C-E7A6-4248-A733-E67A880DF556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E064807C-E7A6-4248-A733-E67A880DF556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E064807C-E7A6-4248-A733-E67A880DF556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E064807C-E7A6-4248-A733-E67A880DF556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ using ScanMonitor.Database.CorrespondentVerwijderen;
 using ScanMonitor.Database.GetCorrespondents;
 using ScanMonitor.Database.SearchDocuments;
 
-namespace ScanMonitor.UI.Admin
+namespace ScanMonitor.UI.Admin.Correspondents
 {
     public class CorrespondentAdminViewModel : GenericAdminViewModel
     {

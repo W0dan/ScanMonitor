@@ -70,16 +70,26 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Admin\AdminItem.cs" />
-    <Compile Include="Admin\CorrespondentAdminViewModel.cs" />
-    <Compile Include="Admin\DocumentTypeAdminViewModel.cs" />
+    <Compile Include="Admin\Correspondents\CorrespondentAdminViewModel.cs" />
+    <Compile Include="Admin\DocumentTypes\CustomFieldDto.cs" />
+    <Compile Include="Admin\DocumentTypes\DocumentTypeAdminViewModel.cs" />
+    <Compile Include="Admin\DocumentTypes\DocumentTypeDetailAdminViewModel.cs" />
+    <Compile Include="Admin\DocumentTypes\DocumentTypeDetailAdminWindow.xaml.cs">
+      <DependentUpon>DocumentTypeDetailAdminWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Admin\GenericAdminViewModel.cs" />
     <Compile Include="Admin\GenericAdminWindow.xaml.cs">
       <DependentUpon>GenericAdminWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Admin\UserAdminViewModel.cs" />
+    <Compile Include="Admin\Users\UserAdminViewModel.cs" />
+    <Compile Include="Base\ListViewModel.cs" />
     <Compile Include="SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Admin\DocumentTypes\DocumentTypeDetailAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\InputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

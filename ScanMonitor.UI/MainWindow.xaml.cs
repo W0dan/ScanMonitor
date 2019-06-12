@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using ScanMonitor.Config;
 using ScanMonitor.UI.Admin;
+using ScanMonitor.UI.Admin.Correspondents;
+using ScanMonitor.UI.Admin.DocumentTypes;
+using ScanMonitor.UI.Admin.Users;
 
 namespace ScanMonitor.UI
 {

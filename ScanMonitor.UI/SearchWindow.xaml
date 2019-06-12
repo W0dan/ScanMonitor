@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Search documents" Height="600" Width="900"
         WindowStartupLocation="CenterOwner"
-        Loaded="SearchWindow_OnLoaded">
+        Loaded="SearchWindow_OnLoaded"
+        ShowInTaskbar="False">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -41,7 +42,7 @@
 
         <Button Grid.Row="5" Grid.Column="1" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="Images/Symbols Find.ico"></Image></Button>
         
-        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding}">
+        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DocumentType" Binding="{Binding DocumentType}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Voor wie ?" Binding="{Binding VoorWie}"></DataGridTextColumn>
@@ -55,7 +56,20 @@
                         </Style>
                     </DataGridHyperlinkColumn.ElementStyle>
                 </DataGridHyperlinkColumn>
-                <DataGridTemplateColumn Header=""  MinWidth="50" MaxWidth="50">
+                <DataGridTemplateColumn Header=""  MinWidth="30" MaxWidth="30">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <EventSetter Event="PreviewMouseLeftButtonDown"
+                                         Handler="OnDetailClicked"/>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="16px" Width="16px" Source="Images/pen.ico" Cursor="Hand" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header=""  MinWidth="30" MaxWidth="30">
                     <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <EventSetter Event="PreviewMouseLeftButtonDown"
@@ -64,7 +78,7 @@
                     </DataGridTemplateColumn.CellStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="Images/delete.png"/>
+                            <Image Height="16px" Width="16px" Source="Images/delete.png" Cursor="Hand" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

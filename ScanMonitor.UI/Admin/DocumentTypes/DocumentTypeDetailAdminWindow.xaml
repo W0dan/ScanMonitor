@@ -1,0 +1,39 @@
+﻿<Window x:Class="ScanMonitor.UI.Admin.DocumentTypes.DocumentTypeDetailAdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScanMonitor.UI.Admin"
+        xmlns:documentTypes="clr-namespace:ScanMonitor.UI.Admin.DocumentTypes"
+        mc:Ignorable="d"
+        Title="DocumentTypeAdminWindow" Height="600" Width="800"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False">
+    <Window.DataContext>
+        <documentTypes:DocumentTypeDetailAdminViewModel />
+    </Window.DataContext>
+    <Grid Name="LayoutGrid" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35px"></RowDefinition>
+            <RowDefinition Height="10px"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50px"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" FontSize="16" Name="DocumentTypeNameLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Naam</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" FontSize="16" Name="DocumentTypeName" VerticalAlignment="Center" Text="{Binding Name}"></TextBox>
+
+        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" ItemsSource="{Binding CustomFields}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Veld naam"></DataGridTextColumn>
+                <DataGridTextColumn Header="Veld type"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Verplicht"></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0" Width="100px" Name="AddButton" Click="OnSaveClicked">Save</Button>
+    </Grid>
+</Window>

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:admin="clr-namespace:ScanMonitor.UI.Admin"
         mc:Ignorable="d"
-        Title="GenericAdminWindow" Height="450" Width="800"
-        WindowStartupLocation="CenterOwner">
+        Title="GenericAdminWindow" Height="700" Width="900"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False">
     <Window.DataContext>
         <admin:GenericAdminViewModel />
     </Window.DataContext>
@@ -20,6 +21,19 @@
         <DataGrid Grid.Row="0" Grid.Column="0" Name="ItemsGrid" AutoGenerateColumns="False" ItemsSource="{Binding Items}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                <DataGridTemplateColumn Header=""  MinWidth="30" MaxWidth="30">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <EventSetter Event="PreviewMouseLeftButtonDown"
+                                         Handler="OnEditClicked"/>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="16px" Width="16px" Source="../Images/pen.ico" Cursor="Hand" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header=""  MinWidth="50" MaxWidth="50">
                     <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">

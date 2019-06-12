@@ -119,5 +119,10 @@ namespace ScanMonitor.UI
 
             throw new ScanMonitorException(message);
         }
+
+        private void OnDetailClicked(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
     }
 }

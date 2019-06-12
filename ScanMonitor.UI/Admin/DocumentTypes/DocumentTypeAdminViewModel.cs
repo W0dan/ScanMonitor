@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
+using ScanMonitor.Database.DocumentTypeAanpassen;
 using ScanMonitor.Database.DocumentTypeToevoegen;
+using ScanMonitor.Database.DocumentTypeVerwijderen;
+using ScanMonitor.Database.GetDocumentTypeById;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.SearchDocuments;
 
-namespace ScanMonitor.UI.Admin
+namespace ScanMonitor.UI.Admin.DocumentTypes
 {
     public class DocumentTypeAdminViewModel : GenericAdminViewModel
     {
@@ -19,6 +23,7 @@ namespace ScanMonitor.UI.Admin
         }
 
         public override string Title => "Beheer van document types";
+        public override bool HasEdit => true;
 
         protected override bool CanBeDeleted(AdminItem item)
         {
@@ -26,6 +31,27 @@ namespace ScanMonitor.UI.Admin
         }
 
         protected override string Message => "Document type kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die van dit type zijn.";
+
+        public override void NavigateToEdit(Window owner, AdminItem item)
+        {
+            var documentType = GetDocumentTypeByIdQuery.Get(new GetDocumentTypeByIdRequest { Id = item.Id });
+
+            DocumentTypeDetailAdminWindow.ShowAdmin(owner, new DocumentTypeDetailAdminViewModel
+            {
+                Id = documentType.Id,
+                Name = documentType.Name,
+                Title = $"Document type {documentType.Name} beheren",
+                CustomFields = documentType.CustomFields
+                .ConvertAll(x => new CustomFieldDto
+                {
+                    Id = x.Id,
+                    DocumentTypeId = x.DocumentTypeId,
+                    FieldName = x.FieldName,
+                    FieldType = x.FieldType,
+                    Mandatory = x.Mandatory
+                })
+            });
+        }
 
         protected override void AddItem(AdminItem item)
         {
@@ -38,12 +64,19 @@ namespace ScanMonitor.UI.Admin
 
         protected override void UpdateItem(AdminItem item)
         {
-            // todo
+            DocumentTypeAanpassenQuery.Update(new DocumentTypeAanpassenCommand
+            {
+                Id = item.Id,
+                Name = item.Name
+            });
         }
 
         protected override void DeleteItem(AdminItem item)
         {
-            // todo
+            DocumentTypeVerwijderenQuery.Delete(new DocumentTypeVerwijderenCommand
+            {
+                Id = item.Id
+            });
         }
     }
 }

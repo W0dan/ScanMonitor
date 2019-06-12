@@ -1,9 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Database.SearchDocuments;
+using ScanMonitor.Database.UserAanpassen;
+using ScanMonitor.Database.UserToevoegen;
+using ScanMonitor.Database.UserVerwijderen;
 
-namespace ScanMonitor.UI.Admin
+namespace ScanMonitor.UI.Admin.Users
 {
     public class UserAdminViewModel : GenericAdminViewModel
     {
@@ -27,17 +31,28 @@ namespace ScanMonitor.UI.Admin
 
         protected override void AddItem(AdminItem item)
         {
-            // todo
+            UserToevoegenQuery.Insert(new UserToevoegenCommand
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = item.Name
+            });
         }
 
         protected override void UpdateItem(AdminItem item)
         {
-            // todo
+            UserAanpassenQuery.Update(new UserAanpassenCommand
+            {
+                Id = item.Id,
+                Name = item.Name
+            });
         }
 
         protected override void DeleteItem(AdminItem item)
         {
-            // todo
+            UserVerwijderenQuery.Delete(new UserVerwijderenCommand
+            {
+                Id = item.Id
+            });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using ScanMonitor.Exceptions;
 
 namespace ScanMonitor.UI.Admin
@@ -8,9 +9,10 @@ namespace ScanMonitor.UI.Admin
     public class GenericAdminViewModel
     {
         public virtual string Title => "Admin";
+        public virtual bool HasEdit => false;
 
         public ObservableCollection<AdminItem> Items { get; set; }
-        public List<AdminItem> OriginalItems { get; set; }
+        protected List<AdminItem> OriginalItems { get; set; }
 
         public void Delete(AdminItem item)
         {
@@ -32,54 +34,11 @@ namespace ScanMonitor.UI.Admin
 
         protected virtual string Message => "";
 
-
         public void Save()
         {
             Insert();
             Update();
             Delete();
-
-            //var itemsToAdd = new List<AdminItem>();
-            //var itemsToUpdate = new List<AdminItem>();
-            //var itemsToDelete = new List<AdminItem>();
-
-            //foreach (var item in Items)
-            //{
-            //    if (item.Id == null)
-            //    {
-            //        itemsToAdd.Add(item);
-            //        continue;
-            //    }
-            //}
-            //foreach (var item in Items)
-            //{
-            //    if (OriginalItems.Any(x => x.Id == item.Id && x.Name != item.Name))
-            //    {
-            //        itemsToUpdate.Add(item);
-            //        continue;
-            //    }
-            //}
-
-            //foreach (var item in OriginalItems)
-            //{
-            //    if (!Items.Any(x => x.Id == item.Id))
-            //    {
-            //        itemsToDelete.Add(item);
-            //    }
-            //}
-
-            //foreach (var itemToAdd in itemsToAdd)
-            //{
-            //    AddItem(itemToAdd);
-            //}
-            //foreach (var itemToUpdate in itemsToUpdate)
-            //{
-            //    UpdateItem(itemToUpdate);
-            //}
-            //foreach (var itemToDelete in itemsToDelete)
-            //{
-            //    DeleteItem(itemToDelete);
-            //}
         }
 
         private void Insert()
@@ -99,14 +58,14 @@ namespace ScanMonitor.UI.Admin
             }
         }
 
+        public virtual void NavigateToEdit(Window owner, AdminItem item) { }
+
         private void Delete()
         {
-            foreach (var item in OriginalItems)
+            foreach (var originalItem in OriginalItems)
             {
-                if (!Items.Any(x => x.Id == item.Id))
-                {
-                    DeleteItem(item);
-                }
+                if (Items.All(x => x.Id != originalItem.Id))
+                    DeleteItem(originalItem);
             }
         }
 

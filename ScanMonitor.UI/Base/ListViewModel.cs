@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using ScanMonitor.UI.Admin;
 
 namespace ScanMonitor.UI.Base
 {
     public abstract class ListViewModel<T>
+        where T : IHasId<string>
     {
-
         public void Save()
         {
             Insert();
@@ -16,26 +18,20 @@ namespace ScanMonitor.UI.Base
 
         private void Insert()
         {
-            foreach (var item in Items.Where(x => x.Id == null))
+            foreach (var item in Items.Where(x => string.IsNullOrWhiteSpace(x.Id)))
                 AddItem(item);
         }
 
-        protected IEnumerable<T> Items { get; set; }
-        protected IEnumerable<T> OriginalItems { get; set; }
+        public ObservableCollection<T> Items { get; set; }
+        protected List<T> OriginalItems { get; set; }
 
         private void Update()
         {
-            foreach (var item in Items)
+            foreach (var item in Items.Where(x => OriginalItems.Any(y => IsChanged(x, y))))
             {
-                if (OriginalItems.Any(x => x.Id == item.Id && x.Name != item.Name))
-                {
-                    UpdateItem(item);
-                }
+                UpdateItem(item);
             }
         }
-
-
-        public virtual void NavigateToEdit(Window owner, T item) { }
 
         private void Delete()
         {
@@ -46,8 +42,10 @@ namespace ScanMonitor.UI.Base
             }
         }
 
-        protected virtual void AddItem(T item) { }
-        protected virtual void UpdateItem(T item) { }
-        protected virtual void DeleteItem(T item) { }
+        protected abstract bool IsChanged(T item, T origItem);
+
+        protected abstract void AddItem(T item);
+        protected abstract void UpdateItem(T item);
+        protected abstract void DeleteItem(T item);
     }
 }

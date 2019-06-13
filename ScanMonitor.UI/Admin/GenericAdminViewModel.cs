@@ -1,18 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using ScanMonitor.Exceptions;
+using ScanMonitor.UI.Base;
 
 namespace ScanMonitor.UI.Admin
 {
-    public class GenericAdminViewModel
+    public class GenericAdminViewModel : ListViewModel<AdminItem>
     {
         public virtual string Title => "Admin";
         public virtual bool HasEdit => false;
-
-        public ObservableCollection<AdminItem> Items { get; set; }
-        protected List<AdminItem> OriginalItems { get; set; }
 
         public void Delete(AdminItem item)
         {
@@ -34,43 +29,16 @@ namespace ScanMonitor.UI.Admin
 
         protected virtual string Message => "";
 
-        public void Save()
-        {
-            Insert();
-            Update();
-            Delete();
-        }
-
-        private void Insert()
-        {
-            foreach (var item in Items.Where(x => x.Id == null))
-                AddItem(item);
-        }
-
-        private void Update()
-        {
-            foreach (var item in Items)
-            {
-                if (OriginalItems.Any(x => x.Id == item.Id && x.Name != item.Name))
-                {
-                    UpdateItem(item);
-                }
-            }
-        }
-
         public virtual void NavigateToEdit(Window owner, AdminItem item) { }
 
-        private void Delete()
+        protected override bool IsChanged(AdminItem item, AdminItem origItem)
         {
-            foreach (var originalItem in OriginalItems)
-            {
-                if (Items.All(x => x.Id != originalItem.Id))
-                    DeleteItem(originalItem);
-            }
+            return !string.IsNullOrWhiteSpace(item.Id)
+                   && item.Name != origItem.Name;
         }
 
-        protected virtual void AddItem(AdminItem item) { }
-        protected virtual void UpdateItem(AdminItem item) { }
-        protected virtual void DeleteItem(AdminItem item) { }
+        protected override void AddItem(AdminItem item) { }
+        protected override void UpdateItem(AdminItem item) { }
+        protected override void DeleteItem(AdminItem item) { }
     }
 }

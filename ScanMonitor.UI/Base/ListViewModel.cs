@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using ScanMonitor.UI.Admin;
 
 namespace ScanMonitor.UI.Base
@@ -9,6 +8,19 @@ namespace ScanMonitor.UI.Base
     public abstract class ListViewModel<T>
         where T : IHasId<string>
     {
+        protected ListViewModel()
+        {
+        }
+
+        protected ListViewModel(List<T> items)
+        {
+            Items = new ObservableCollection<T>(items);
+            OriginalItems = items;
+        }
+
+        public ObservableCollection<T> Items { get; set; }
+        public List<T> OriginalItems { get; set; }
+
         public void Save()
         {
             Insert();
@@ -21,9 +33,6 @@ namespace ScanMonitor.UI.Base
             foreach (var item in Items.Where(x => string.IsNullOrWhiteSpace(x.Id)))
                 AddItem(item);
         }
-
-        public ObservableCollection<T> Items { get; set; }
-        protected List<T> OriginalItems { get; set; }
 
         private void Update()
         {

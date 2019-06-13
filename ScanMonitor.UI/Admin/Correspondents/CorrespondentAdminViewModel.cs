@@ -11,13 +11,13 @@ namespace ScanMonitor.UI.Admin.Correspondents
 {
     public class CorrespondentAdminViewModel : GenericAdminViewModel
     {
-        public CorrespondentAdminViewModel()
+        public CorrespondentAdminViewModel() : base(GetCorrespondentsQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
         {
-            var correspondents = GetCorrespondentsQuery.List()
-                .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
+            //var correspondents = GetCorrespondentsQuery.List()
+            //    .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
-            Items = new ObservableCollection<AdminItem>(correspondents);
-            OriginalItems = correspondents;
+            //Items = new ObservableCollection<AdminItem>(correspondents);
+            //OriginalItems = correspondents;
         }
 
         public override string Title => "Beheer van correspondenten";

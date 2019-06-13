@@ -13,13 +13,13 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
 {
     public class DocumentTypeAdminViewModel : GenericAdminViewModel
     {
-        public DocumentTypeAdminViewModel()
+        public DocumentTypeAdminViewModel() : base(GetDocumentTypesQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
         {
-            var documentTypes = GetDocumentTypesQuery.List()
-                .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
+            //var documentTypes = GetDocumentTypesQuery.List()
+            //    .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
-            Items = new ObservableCollection<AdminItem>(documentTypes);
-            OriginalItems = documentTypes;
+            //Items = new ObservableCollection<AdminItem>(documentTypes);
+            //OriginalItems = documentTypes;
         }
 
         public override string Title => "Beheer van document types";
@@ -36,20 +36,14 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
         {
             var documentType = GetDocumentTypeByIdQuery.Get(new GetDocumentTypeByIdRequest { Id = item.Id });
 
+            var customFields = documentType.CustomFields.ConvertAll(x => new CustomFieldDto { Id = x.Id, FieldType = x.FieldType, FieldName = x.FieldName, Mandatory = x.Mandatory, DocumentTypeId = x.DocumentTypeId });
             DocumentTypeDetailAdminWindow.ShowAdmin(owner, new DocumentTypeDetailAdminViewModel
             {
                 Id = documentType.Id,
                 Name = documentType.Name,
                 Title = $"Document type {documentType.Name} beheren",
-                CustomFields = documentType.CustomFields
-                .ConvertAll(x => new CustomFieldDto
-                {
-                    Id = x.Id,
-                    DocumentTypeId = x.DocumentTypeId,
-                    FieldName = x.FieldName,
-                    FieldType = x.FieldType,
-                    Mandatory = x.Mandatory
-                })
+                Items = new ObservableCollection<CustomFieldDto>(customFields),
+                OriginalItems = customFields
             });
         }
 

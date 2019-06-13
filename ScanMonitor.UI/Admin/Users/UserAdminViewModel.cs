@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Database.SearchDocuments;
@@ -11,13 +10,13 @@ namespace ScanMonitor.UI.Admin.Users
 {
     public class UserAdminViewModel : GenericAdminViewModel
     {
-        public UserAdminViewModel()
+        public UserAdminViewModel():base(GetPeopleQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
         {
-            var people = GetPeopleQuery.List()
-                .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
+            //var people = GetPeopleQuery.List()
+            //    .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
-            Items = new ObservableCollection<AdminItem>(people);
-            OriginalItems = people;
+            //Items = new ObservableCollection<AdminItem>(people);
+            //OriginalItems = people;
         }
 
         public override string Title => "Beheer van gebruikers";

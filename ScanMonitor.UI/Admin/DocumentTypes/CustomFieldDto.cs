@@ -1,6 +1,6 @@
 ﻿namespace ScanMonitor.UI.Admin.DocumentTypes
 {
-    public class CustomFieldDto
+    public class CustomFieldDto : IHasId<string>
     {
         public string Id { get; set; }
         public string DocumentTypeId { get; set; }

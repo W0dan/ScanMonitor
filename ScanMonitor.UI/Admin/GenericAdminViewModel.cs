@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using ScanMonitor.Exceptions;
 using ScanMonitor.UI.Base;
 
@@ -8,6 +9,8 @@ namespace ScanMonitor.UI.Admin
     {
         public virtual string Title => "Admin";
         public virtual bool HasEdit => false;
+
+        public GenericAdminViewModel(List<AdminItem> items) : base(items) { }
 
         public void Delete(AdminItem item)
         {

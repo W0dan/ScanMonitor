@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Database.SearchDocuments;
@@ -10,13 +11,13 @@ namespace ScanMonitor.UI.Admin.Users
 {
     public class UserAdminViewModel : GenericAdminViewModel
     {
-        public UserAdminViewModel():base(GetPeopleQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
+        public UserAdminViewModel()//:base(GetPeopleQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
         {
-            //var people = GetPeopleQuery.List()
-            //    .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
+            var people = GetPeopleQuery.List()
+                .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
-            //Items = new ObservableCollection<AdminItem>(people);
-            //OriginalItems = people;
+            Items = new ObservableCollection<AdminItem>(people);
+            OriginalItems = people;
         }
 
         public override string Title => "Beheer van gebruikers";
@@ -26,7 +27,7 @@ namespace ScanMonitor.UI.Admin.Users
             return !SearchDocumentsQuery.List(new SearchDocumentsRequest { PersonId = item.Id }).Any();
         }
 
-        protected override string Message => "Gebruiker kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die behoren to deze gebruiker.";
+        protected override string CannotDeleteMessage => "Gebruiker kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die behoren to deze gebruiker.";
 
         protected override void AddItem(AdminItem item)
         {

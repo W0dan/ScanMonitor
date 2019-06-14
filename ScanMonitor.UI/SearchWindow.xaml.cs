@@ -107,10 +107,9 @@ namespace ScanMonitor.UI
             });
 
             var dataContext = (ObservableCollection<DocumentDto>)FoundItemsDataGrid.DataContext;
-            foreach (var doc in dataContext)
-                if (doc.Id == document.Id)
-                    dataContext.Remove(doc);
-
+            var doc = dataContext.Single(x => x.Id == document.Id);
+            dataContext.Remove(doc);
+            
             if (!warnings.Any()) return;
 
             var message = warnings

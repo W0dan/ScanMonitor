@@ -1,4 +1,9 @@
-﻿using ScanMonitor.UI.Base;
+﻿using System;
+using System.Collections.Generic;
+using ScanMonitor.Database.CustomFieldAanpassen;
+using ScanMonitor.Database.CustomFieldToevoegen;
+using ScanMonitor.Database.CustomFieldVerwijderen;
+using ScanMonitor.UI.Base;
 
 namespace ScanMonitor.UI.Admin.DocumentTypes
 {
@@ -8,6 +13,14 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
 
         public string Id { get; set; }
         public string Name { get; set; }
+
+        public List<FieldTypes> DataTypes => new List<FieldTypes>
+        {
+            FieldTypes.Tekst,
+            FieldTypes.Numeriek,
+            FieldTypes.Datum,
+            FieldTypes.JaNee,
+        };
 
         protected override bool IsChanged(CustomFieldDto item, CustomFieldDto origItem)
         {
@@ -19,17 +32,30 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
 
         protected override void AddItem(CustomFieldDto item)
         {
-            throw new System.NotImplementedException();
+            CustomFieldToevoegenQuery.Insert(new CustomFieldToevoegenCommand
+            {
+                Id = Guid.NewGuid().ToString(),
+                FieldName = item.FieldName,
+                DocumentTypeId = Id,
+                FieldType = item.FieldType.ToString(),
+                Mandatory = item.Mandatory
+            });
         }
 
         protected override void UpdateItem(CustomFieldDto item)
         {
-            throw new System.NotImplementedException();
+            CustomFieldAanpassenQuery.Update(new CustomFieldAanpassenCommand
+            {
+                Id = item.Id,
+                FieldName = item.FieldName,
+                FieldType = item.FieldType.ToString(),
+                Mandatory = item.Mandatory
+            });
         }
 
         protected override void DeleteItem(CustomFieldDto item)
         {
-            throw new System.NotImplementedException();
+            CustomFieldVerwijderenQuery.Delete(new CustomFieldVerwijderenCommand { Id = item.Id });
         }
     }
 }

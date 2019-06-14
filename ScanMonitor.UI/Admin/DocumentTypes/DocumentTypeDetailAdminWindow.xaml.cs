@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace ScanMonitor.UI.Admin.DocumentTypes
 {
@@ -32,6 +33,13 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
             Model.Save();
 
             MessageBox.Show("Wijzigingen bewaard", "Wijzigingen bewaard", MessageBoxButton.OK);
+        }
+
+        private void OnDeleteClicked(object sender, MouseButtonEventArgs e)
+        {
+            var clickedItem = ((FrameworkElement)sender).DataContext as CustomFieldDto;
+
+            Model.Delete(clickedItem);
         }
     }
 }

@@ -27,11 +27,35 @@
         <Label Grid.Row="0" Grid.Column="0" FontSize="16" Name="DocumentTypeNameLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Naam</Label>
         <TextBox Grid.Row="0" Grid.Column="1" FontSize="16" Name="DocumentTypeName" VerticalAlignment="Center" Text="{Binding Name}"></TextBox>
 
-        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" ItemsSource="{Binding CustomFields}">
+        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" ItemsSource="{Binding Items}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Veld naam"></DataGridTextColumn>
-                <DataGridTextColumn Header="Veld type"></DataGridTextColumn>
-                <DataGridCheckBoxColumn Header="Verplicht"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Veld naam" Binding="{Binding FieldName}"></DataGridTextColumn>
+                <DataGridComboBoxColumn Header="Veld type" SelectedValueBinding="{Binding FieldType}">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.DataTypes, RelativeSource={RelativeSource AncestorType=Window}}"></Setter>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.DataTypes, RelativeSource={RelativeSource AncestorType=Window}}"></Setter>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridCheckBoxColumn Header="Verplicht" Binding="{Binding Mandatory}"></DataGridCheckBoxColumn>
+                <DataGridTemplateColumn Width="*"></DataGridTemplateColumn>
+                <DataGridTemplateColumn Header=""  MinWidth="50" MaxWidth="50">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnDeleteClicked"/>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="16px" Width="16px" Source="../../Images/delete.png" Cursor="Hand" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0" Width="100px" Name="AddButton" Click="OnSaveClicked">Save</Button>

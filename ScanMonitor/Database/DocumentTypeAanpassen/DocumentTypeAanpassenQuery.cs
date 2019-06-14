@@ -9,7 +9,7 @@ namespace ScanMonitor.Database.DocumentTypeAanpassen
         {
             using (var connection = AppConfig.Connections.ScanDbConnection)
             {
-                const string query = "UPDATE Correspondents " +
+                const string query = "UPDATE DocumentTypes " +
                                      "SET Name=@Name " +
                                      "WHERE Id=@Id";
 

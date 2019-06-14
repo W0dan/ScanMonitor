@@ -11,13 +11,13 @@ namespace ScanMonitor.UI.Admin.Correspondents
 {
     public class CorrespondentAdminViewModel : GenericAdminViewModel
     {
-        public CorrespondentAdminViewModel() : base(GetCorrespondentsQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
+        public CorrespondentAdminViewModel() //: base(GetCorrespondentsQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
         {
-            //var correspondents = GetCorrespondentsQuery.List()
-            //    .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
+            var correspondents = GetCorrespondentsQuery.List()
+                .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
-            //Items = new ObservableCollection<AdminItem>(correspondents);
-            //OriginalItems = correspondents;
+            Items = new ObservableCollection<AdminItem>(correspondents);
+            OriginalItems = correspondents;
         }
 
         public override string Title => "Beheer van correspondenten";
@@ -27,7 +27,7 @@ namespace ScanMonitor.UI.Admin.Correspondents
             return !SearchDocumentsQuery.List(new SearchDocumentsRequest { CorrespondentId = (string)item.Id }).Any();
         }
 
-        protected override string Message => "Correspondent kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die afkomstig zijn van deze correspondent.";
+        protected override string CannotDeleteMessage => "Correspondent kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die afkomstig zijn van deze correspondent.";
 
         protected override void AddItem(AdminItem item)
         {

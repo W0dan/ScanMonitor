@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>ScanMonitor</RootNamespace>
     <AssemblyName>ScanMonitor</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -60,15 +63,21 @@
     <Compile Include="Database\CreateDocument\CreateDocumentQuery.cs" />
     <Compile Include="Database\CreateScan\CreateScanCommand.cs" />
     <Compile Include="Database\CreateScan\CreateScanQuery.cs" />
+    <Compile Include="Database\CustomFieldAanpassen\CustomFieldAanpassenCommand.cs" />
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenCommand.cs" />
     <Compile Include="Database\CorrespondentToevoegen\CorrespondentToevoegenQuery.cs" />
     <Compile Include="Database\DeleteDocument\DeleteDocumentHandler.cs" />
     <Compile Include="Database\DeleteDocument\DeleteDocumentQuery.cs" />
     <Compile Include="Database\DeleteDocument\DeleteDocumentCommand.cs" />
+    <Compile Include="Database\CustomFieldAanpassen\CustomFieldAanpassenQuery.cs" />
     <Compile Include="Database\DocumentTypeAanpassen\DocumentTypeAanpassenQuery.cs" />
+    <Compile Include="Database\CustomFieldToevoegen\CustomFieldToevoegenCommand.cs" />
+    <Compile Include="Database\CustomFieldToevoegen\CustomFieldToevoegenQuery.cs" />
     <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenCommand.cs" />
     <Compile Include="Database\DocumentTypeToevoegen\DocumentTypeToevoegenQuery.cs" />
+    <Compile Include="Database\CustomFieldVerwijderen\CustomFieldVerwijderenCommand.cs" />
+    <Compile Include="Database\CustomFieldVerwijderen\CustomFieldVerwijderenQuery.cs" />
     <Compile Include="Database\DocumentTypeVerwijderen\DocumentTypeVerwijderenCommand.cs" />
     <Compile Include="Database\DocumentTypeVerwijderen\DocumentTypeVerwijderenQuery.cs" />
     <Compile Include="Database\GetCorrespondents\CorrespondentDto.cs" />

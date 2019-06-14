@@ -8,18 +8,19 @@ using ScanMonitor.Database.DocumentTypeVerwijderen;
 using ScanMonitor.Database.GetDocumentTypeById;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.SearchDocuments;
+using ScanMonitor.UI.Extensions;
 
 namespace ScanMonitor.UI.Admin.DocumentTypes
 {
     public class DocumentTypeAdminViewModel : GenericAdminViewModel
     {
-        public DocumentTypeAdminViewModel() : base(GetDocumentTypesQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
+        public DocumentTypeAdminViewModel() //: base(GetDocumentTypesQuery.List().Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList())
         {
-            //var documentTypes = GetDocumentTypesQuery.List()
-            //    .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
+            var documentTypes = GetDocumentTypesQuery.List()
+                .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
-            //Items = new ObservableCollection<AdminItem>(documentTypes);
-            //OriginalItems = documentTypes;
+            Items = new ObservableCollection<AdminItem>(documentTypes);
+            OriginalItems = documentTypes;
         }
 
         public override string Title => "Beheer van document types";
@@ -30,13 +31,13 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
             return !SearchDocumentsQuery.List(new SearchDocumentsRequest { DocumentTypeId = (string)item.Id }).Any();
         }
 
-        protected override string Message => "Document type kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die van dit type zijn.";
+        protected override string CannotDeleteMessage => "Document type kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die van dit type zijn.";
 
         public override void NavigateToEdit(Window owner, AdminItem item)
         {
             var documentType = GetDocumentTypeByIdQuery.Get(new GetDocumentTypeByIdRequest { Id = item.Id });
 
-            var customFields = documentType.CustomFields.ConvertAll(x => new CustomFieldDto { Id = x.Id, FieldType = x.FieldType, FieldName = x.FieldName, Mandatory = x.Mandatory, DocumentTypeId = x.DocumentTypeId });
+            var customFields = documentType.CustomFields.ConvertAll(x => new CustomFieldDto { Id = x.Id, FieldType = x.FieldType.ToEnum<FieldTypes>(), FieldName = x.FieldName, Mandatory = x.Mandatory, DocumentTypeId = x.DocumentTypeId });
             DocumentTypeDetailAdminWindow.ShowAdmin(owner, new DocumentTypeDetailAdminViewModel
             {
                 Id = documentType.Id,

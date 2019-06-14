@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ScanMonitor.Exceptions;
 using ScanMonitor.UI.Admin;
 
 namespace ScanMonitor.UI.Base
@@ -8,18 +9,26 @@ namespace ScanMonitor.UI.Base
     public abstract class ListViewModel<T>
         where T : IHasId<string>
     {
-        protected ListViewModel()
-        {
-        }
-
-        protected ListViewModel(List<T> items)
-        {
-            Items = new ObservableCollection<T>(items);
-            OriginalItems = items;
-        }
-
         public ObservableCollection<T> Items { get; set; }
         public List<T> OriginalItems { get; set; }
+
+        public void Delete(T item)
+        {
+            if (item == null)
+                throw new ScanMonitorException("Dit item kan niet verwijderd worden.");
+
+            if (CanBeDeleted(item))
+                Items.Remove(item);
+            else
+                throw new ScanMonitorException(CannotDeleteMessage);
+        }
+
+        protected virtual bool CanBeDeleted(T item)
+        {
+            return true;
+        }
+
+        protected virtual string CannotDeleteMessage => "";
 
         public void Save()
         {

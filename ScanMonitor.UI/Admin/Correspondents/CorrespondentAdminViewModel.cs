@@ -17,7 +17,7 @@ namespace ScanMonitor.UI.Admin.Correspondents
                 .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
             Items = new ObservableCollection<AdminItem>(correspondents);
-            OriginalItems = correspondents;
+            //OriginalItems = correspondents;
         }
 
         public override string Title => "Beheer van correspondenten";

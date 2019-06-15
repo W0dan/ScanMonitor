@@ -59,7 +59,7 @@ namespace ScanMonitor.Logic.NewScan
             CreateDocumentQuery.Insert(new CreateDocumentCommand
             {
                 Id = documentId,
-                PersonId = command.PersonId,
+                PersonId = command.PersonId.ToString(),
                 CorrespondentId = command.CorrespondentId.ToString(),
                 DocumentTypeId = command.DocumentTypeId.ToString(),
                 Datum = command.Datum,

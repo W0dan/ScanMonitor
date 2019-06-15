@@ -1,4 +1,4 @@
-﻿<Window x:Class="ScanMonitor.UI.SearchWindow"
+﻿<Window x:Class="ScanMonitor.UI.Searching.SearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -40,7 +40,7 @@
         <Label Grid.Row="4" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Zoekterm:</Label>
         <TextBox Grid.Row="4" Grid.Column="1" FontSize="16" Name="DescriptionTextbox" VerticalAlignment="Center"></TextBox>
 
-        <Button Grid.Row="5" Grid.Column="1" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="Images/Symbols Find.ico"></Image></Button>
+        <Button Grid.Row="5" Grid.Column="1" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="../Images/Symbols Find.ico"></Image></Button>
         
         <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding}">
             <DataGrid.Columns>
@@ -65,7 +65,7 @@
                     </DataGridTemplateColumn.CellStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Height="16px" Width="16px" Source="Images/pen.ico" Cursor="Hand" />
+                            <Image Height="16px" Width="16px" Source="../Images/pen.ico" Cursor="Hand" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -78,7 +78,7 @@
                     </DataGridTemplateColumn.CellStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Height="16px" Width="16px" Source="Images/delete.png" Cursor="Hand" />
+                            <Image Height="16px" Width="16px" Source="../Images/delete.png" Cursor="Hand" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

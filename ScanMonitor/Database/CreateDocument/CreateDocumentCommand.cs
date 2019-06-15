@@ -6,7 +6,7 @@ namespace ScanMonitor.Database.CreateDocument
     {
         public string Id { get; set; }
         public string DocumentTypeId { get; set; }
-        public int PersonId { get; set; }
+        public string PersonId { get; set; }
         public string CorrespondentId { get; set; }
         public DateTime Datum { get; set; }
         public string Description { get; set; }

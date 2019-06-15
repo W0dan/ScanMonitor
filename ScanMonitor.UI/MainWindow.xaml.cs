@@ -36,7 +36,7 @@ namespace ScanMonitor.UI
                     var label = new Label { Content = fileName };
                     ProcessedFiles.Children.Add(label);
 
-                    IndexWindow.ProcessFile(this, fileName);
+                    Indexing.IndexWindow.ProcessFile(this, fileName);
                 });
             }
         }
@@ -47,7 +47,7 @@ namespace ScanMonitor.UI
         }
 
         private void SearchMenuItem_OnClick(object sender, RoutedEventArgs e) 
-            => SearchWindow.StartSearch(this);
+            => Searching.SearchWindow.StartSearch(this);
 
         private void AdminUsersMenuItem_OnClick(object sender, RoutedEventArgs e) 
             => GenericAdminWindow.ShowAdmin(this, new UserAdminViewModel());

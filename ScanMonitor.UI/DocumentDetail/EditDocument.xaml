@@ -1,0 +1,44 @@
+﻿<Window x:Class="ScanMonitor.UI.DocumentDetail.EditDocument"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScanMonitor.UI.DocumentDetail"
+        mc:Ignorable="d"
+        Title="EditDocument" Height="450" Width="800">
+    <Grid Name="LayoutGrid" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Voor Wie:</Label>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Correspondent:</Label>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Document type:</Label>
+        <Label Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Datum:</Label>
+        <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Beschrijving:</Label>
+
+        <TextBox Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
+
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="CustomFieldsStackPanel">
+            <!--Todo: custom fields come here-->
+        </StackPanel>
+        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Name="ScansDataGrid">
+            <!--Todo: Scans come here - clickable (navigable)-->
+        </DataGrid>
+    </Grid>
+</Window>

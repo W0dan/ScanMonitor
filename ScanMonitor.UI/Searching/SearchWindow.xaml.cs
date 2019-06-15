@@ -11,7 +11,7 @@ using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Database.SearchDocuments;
 using ScanMonitor.Exceptions;
 
-namespace ScanMonitor.UI
+namespace ScanMonitor.UI.Searching
 {
     /// <summary>
     /// Interaction logic for SearchWindow.xaml
@@ -121,7 +121,7 @@ namespace ScanMonitor.UI
 
         private void OnDetailClicked(object sender, MouseButtonEventArgs e)
         {
-            
+            // -> navigate to detail of document
         }
     }
 }

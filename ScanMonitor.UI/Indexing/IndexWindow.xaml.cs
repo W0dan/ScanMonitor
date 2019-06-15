@@ -15,9 +15,8 @@ using ScanMonitor.Logic.NewScan;
 using ScanMonitor.Logic.RemoveScan;
 using ScanMonitor.UI.Dialogs;
 using ScanMonitor.UI.Extensions;
-using static ScanMonitor.UI.Extensions.TryExtensions;
 
-namespace ScanMonitor.UI
+namespace ScanMonitor.UI.Indexing
 {
     public partial class IndexWindow : Window
     {
@@ -46,7 +45,7 @@ namespace ScanMonitor.UI
             InitialiseFields();
 
             var canAccessFile = false;
-            Try(() => canAccessFile = FileName.CanAccessFile()).Times(10);
+            TryExtensions.Try(() => canAccessFile = FileName.CanAccessFile()).Times(10);
             if (!canAccessFile) return;
 
             ShowFile();
@@ -233,7 +232,7 @@ namespace ScanMonitor.UI
             {
                 Filename = FileName,
                 DocumentTypeId = new Guid(documentTypeIdString),
-                PersonId = int.Parse(personIdString),
+                PersonId = new Guid(personIdString),
                 CorrespondentId = new Guid(correspondentIdString),
                 Datum = DatumOntvangenDatePicker.SelectedDate ?? DateTime.Today,
                 Description = DescriptionTextbox.Text

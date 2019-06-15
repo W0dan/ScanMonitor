@@ -86,8 +86,11 @@
     </Compile>
     <Compile Include="Admin\Users\UserAdminViewModel.cs" />
     <Compile Include="Base\ListViewModel.cs" />
+    <Compile Include="DocumentDetail\EditDocument.xaml.cs">
+      <DependentUpon>EditDocument.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="SearchWindow.xaml.cs">
+    <Compile Include="Searching\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Admin\DocumentTypes\DocumentTypeDetailAdminWindow.xaml">
@@ -102,7 +105,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IndexWindow.xaml">
+    <Page Include="DocumentDetail\EditDocument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Indexing\IndexWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,14 +126,14 @@
     </Compile>
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Extensions\TryExtensions.cs" />
-    <Compile Include="IndexWindow.xaml.cs">
+    <Compile Include="Indexing\IndexWindow.xaml.cs">
       <DependentUpon>IndexWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SearchWindow.xaml">
+    <Page Include="Searching\SearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

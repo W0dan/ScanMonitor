@@ -20,7 +20,7 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
                 .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
             Items = new ObservableCollection<AdminItem>(documentTypes);
-            OriginalItems = documentTypes;
+            //OriginalItems = documentTypes;
         }
 
         public override string Title => "Beheer van document types";
@@ -44,7 +44,7 @@ namespace ScanMonitor.UI.Admin.DocumentTypes
                 Name = documentType.Name,
                 Title = $"Document type {documentType.Name} beheren",
                 Items = new ObservableCollection<CustomFieldDto>(customFields),
-                OriginalItems = customFields
+                //OriginalItems = customFields
             });
         }
 

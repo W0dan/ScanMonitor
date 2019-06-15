@@ -7,10 +7,21 @@ using ScanMonitor.UI.Admin;
 namespace ScanMonitor.UI.Base
 {
     public abstract class ListViewModel<T>
-        where T : IHasId<string>
+        where T : IHasId<string>, ICanBeCloned<T>
     {
-        public ObservableCollection<T> Items { get; set; }
-        public List<T> OriginalItems { get; set; }
+        private ObservableCollection<T> items;
+
+        public ObservableCollection<T> Items
+        {
+            get => items;
+            set
+            {
+                items = value;
+                OriginalItems = items.Select(x => x.Clone()).ToList();
+            }
+        }
+
+        private List<T> OriginalItems { get; set; }
 
         public void Delete(T item)
         {

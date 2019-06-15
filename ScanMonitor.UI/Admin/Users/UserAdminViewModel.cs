@@ -17,7 +17,7 @@ namespace ScanMonitor.UI.Admin.Users
                 .Select(x => new AdminItem { Id = x.Id, Name = x.Name }).ToList();
 
             Items = new ObservableCollection<AdminItem>(people);
-            OriginalItems = people;
+            //OriginalItems = people;
         }
 
         public override string Title => "Beheer van gebruikers";

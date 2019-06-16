@@ -82,11 +82,16 @@
     <Compile Include="Database\DocumentTypeVerwijderen\DocumentTypeVerwijderenQuery.cs" />
     <Compile Include="Database\GetCorrespondents\CorrespondentDto.cs" />
     <Compile Include="Database\GetCorrespondents\GetCorrespondentsQuery.cs" />
+    <Compile Include="Database\GetDocumentForEdit\CustomFieldDto.cs" />
+    <Compile Include="Database\GetDocumentForEdit\DocumentDto.cs" />
+    <Compile Include="Database\GetDocumentForEdit\GetDocumentForEditQuery.cs" />
+    <Compile Include="Database\GetDocumentForEdit\GetDocumentForEditRequest.cs" />
     <Compile Include="Database\GetDocumentById\DocumentDto.cs" />
     <Compile Include="Database\GetDocumentById\GetDocumentByIdQuery.cs" />
     <Compile Include="Database\GetDocumentById\GetDocumentByIdRequest.cs" />
     <Compile Include="Database\GetDocumentFolderInfo\DocumentDto.cs" />
     <Compile Include="Database\GetDocumentFolderInfo\GetDocumentFolderInfoQuery.cs" />
+    <Compile Include="Database\GetDocumentForEdit\ScanDto.cs" />
     <Compile Include="Database\GetDocumentsByToday\DocumentDto.cs" />
     <Compile Include="Database\GetDocumentsByToday\GetDocumentsByTodayQuery.cs" />
     <Compile Include="Database\GetDocumentTypeById\CustomFieldDto.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="Database\GetDocumentTypes\GetDocumentTypesQuery.cs" />
     <Compile Include="Database\GetPeople\GetPeopleQuery.cs" />
     <Compile Include="Database\GetPeople\PersonDto.cs" />
+    <Compile Include="Database\SaveDocument\SaveDocumentHandler.cs" />
     <Compile Include="Database\SearchDocuments\DocumentDto.cs" />
     <Compile Include="Database\SearchDocuments\SearchDocumentsQuery.cs" />
     <Compile Include="Database\SearchDocuments\SearchDocumentsRequest.cs" />

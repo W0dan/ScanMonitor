@@ -89,7 +89,9 @@
     <Compile Include="DocumentDetail\EditDocument.xaml.cs">
       <DependentUpon>EditDocument.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DocumentDetail\EditDocumentViewModel.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Searching\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>

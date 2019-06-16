@@ -5,10 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScanMonitor.UI.DocumentDetail"
         mc:Ignorable="d"
-        Title="EditDocument" Height="450" Width="800">
+        Title="EditDocument" Height="450" Width="800"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False">
+    <Window.DataContext>
+        <local:EditDocumentViewModel />
+    </Window.DataContext>
     <Grid Name="LayoutGrid" Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="200px"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -18,27 +23,46 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Voor Wie:</Label>
-        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Correspondent:</Label>
-        <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Document type:</Label>
+        <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Document type:</Label>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Voor Wie:</Label>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Correspondent:</Label>
         <Label Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Datum:</Label>
         <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center">Beschrijving:</Label>
 
-        <TextBox Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center"></TextBox>
+        <Label Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Name="DocumentTypeLabel" Content="{Binding DocumentType}"></Label>
+        <ComboBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Name="PersonComboBox" 
+                  ItemsSource="{Binding PeopleRefdata}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding PersonId}"
+                  ></ComboBox>
+        <ComboBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Name="CorrespondentComboBox" 
+                  ItemsSource="{Binding CorrespondentsRefdata}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding CorrespondentId}"
+                  ></ComboBox>
+        <DatePicker Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Name="DatumDatePicker" SelectedDate="{Binding Datum}"></DatePicker>
+        <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Name="Beschrijving" Text="{Binding Beschrijving}"></TextBox>
 
         <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="CustomFieldsStackPanel">
             <!--Todo: custom fields come here-->
         </StackPanel>
-        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Name="ScansDataGrid">
-            <!--Todo: Scans come here - clickable (navigable)-->
+        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Name="ScansDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Scans}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=\{0:dd/MM/yyyy\}}"></DataGridTextColumn>
+                <DataGridHyperlinkColumn Header="Bestand" Binding="{Binding FileName}" Width="*">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="OnHyperlinkClicked"></EventSetter>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>

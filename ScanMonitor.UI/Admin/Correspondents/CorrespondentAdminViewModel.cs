@@ -24,7 +24,7 @@ namespace ScanMonitor.UI.Admin.Correspondents
 
         protected override bool CanBeDeleted(AdminItem item)
         {
-            return !SearchDocumentsQuery.List(new SearchDocumentsRequest { CorrespondentId = (string)item.Id }).Any();
+            return !SearchDocumentsQuery.List(new SearchDocumentsRequest { CorrespondentId = item.Id }).Any();
         }
 
         protected override string CannotDeleteMessage => "Correspondent kan niet verwijderd worden, want er zijn nog documenten aanwezig in de databank die afkomstig zijn van deze correspondent.";

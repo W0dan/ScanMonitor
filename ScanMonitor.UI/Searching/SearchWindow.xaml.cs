@@ -6,10 +6,13 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using ScanMonitor.Database.DeleteDocument;
 using ScanMonitor.Database.GetCorrespondents;
+using ScanMonitor.Database.GetDocumentForEdit;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Database.SearchDocuments;
 using ScanMonitor.Exceptions;
+using ScanMonitor.UI.DocumentDetail;
+using DocumentDto = ScanMonitor.Database.SearchDocuments.DocumentDto;
 
 namespace ScanMonitor.UI.Searching
 {
@@ -109,7 +112,7 @@ namespace ScanMonitor.UI.Searching
             var dataContext = (ObservableCollection<DocumentDto>)FoundItemsDataGrid.DataContext;
             var doc = dataContext.Single(x => x.Id == document.Id);
             dataContext.Remove(doc);
-            
+
             if (!warnings.Any()) return;
 
             var message = warnings
@@ -121,7 +124,24 @@ namespace ScanMonitor.UI.Searching
 
         private void OnDetailClicked(object sender, MouseButtonEventArgs e)
         {
+            // -> new window : edit details of admin item  (specific)
+            var clickedItem = (DocumentDto)((FrameworkElement)sender).DataContext;
+
+            var documentForEdit = GetDocumentForEditQuery.Get(new GetDocumentForEditRequest { Id = clickedItem.Id });
+
             // -> navigate to detail of document
+            var editDocumentViewModel = new EditDocumentViewModel
+            {
+                DocumentType = documentForEdit.DocumentType,
+                Beschrijving = documentForEdit.Beschrijving,
+                CorrespondentId = documentForEdit.CorrespondentId,
+                Datum = documentForEdit.DatumOntvangen,
+                PersonId = documentForEdit.PersonId,
+                CustomFields = new ObservableCollection<CustomFieldDto>(documentForEdit.CustomFields),
+                Scans = new ObservableCollection<ScanDto>(documentForEdit.Scans)
+            };
+
+            EditDocument.ShowEditDocument(this, editDocumentViewModel);
         }
     }
 }

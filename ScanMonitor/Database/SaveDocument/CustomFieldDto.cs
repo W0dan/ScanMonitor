@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScanMonitor.Database.GetDocumentForEdit
+namespace ScanMonitor.Database.SaveDocument
 {
     public class CustomFieldDto
     {

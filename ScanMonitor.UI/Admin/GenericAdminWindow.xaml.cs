@@ -32,13 +32,6 @@ namespace ScanMonitor.UI.Admin
             window.ShowDialog();
         }
 
-        private void OnDeleteClicked(object sender, MouseButtonEventArgs e)
-        {
-            var clickedItem = ((FrameworkElement)sender).DataContext as AdminItem;
-
-            Model.Delete(clickedItem);
-        }
-
         private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
             Model.Save();
@@ -46,10 +39,21 @@ namespace ScanMonitor.UI.Admin
             MessageBox.Show("Wijzigingen bewaard", "Wijzigingen bewaard", MessageBoxButton.OK);
         }
 
+        private void OnDeleteClicked(object sender, MouseButtonEventArgs e)
+        {
+            var clickedItem = (AdminItem)((FrameworkElement)sender).DataContext;
+
+            if (string.IsNullOrEmpty(clickedItem.Id)) return;
+
+            Model.Delete(clickedItem);
+        }
+
         private void OnEditClicked(object sender, MouseButtonEventArgs e)
         {
             // -> new window : edit details of admin item  (specific)
-            var clickedItem = ((FrameworkElement)sender).DataContext as AdminItem;
+            var clickedItem = (AdminItem)((FrameworkElement)sender).DataContext;
+
+            if (string.IsNullOrEmpty(clickedItem.Id)) return;
 
             Model.NavigateToEdit(this, clickedItem);
         }

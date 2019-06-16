@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
+using ScanMonitor.Database.SaveDocument;
 using ScanMonitor.UI.Admin.DocumentTypes;
 using ScanMonitor.UI.Extensions;
 using CustomFieldDto = ScanMonitor.Database.GetDocumentForEdit.CustomFieldDto;
@@ -34,40 +37,79 @@ namespace ScanMonitor.UI.DocumentDetail
             window.ShowDialog();
         }
 
-        private static void CreateCustomFields(EditDocument window, IEnumerable<CustomFieldDto> customFields)
+        private EditDocumentViewModel Model => (EditDocumentViewModel)DataContext;
+
+        private static void CreateCustomFields(EditDocument window, IReadOnlyCollection<CustomFieldDto> customFields)
         {
             var stackPanel = window.CustomFieldsStackPanel;
 
+            var layoutGrid = new Grid {HorizontalAlignment = HorizontalAlignment.Stretch};
+            layoutGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(pixels: 200) });
+            layoutGrid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            stackPanel.Children.Add(layoutGrid);
+
+            var row = 0;
             foreach (var field in customFields)
             {
-                var customFieldContainer = new StackPanel { Orientation = Orientation.Horizontal };
-                customFieldContainer.Children.Add(new Label
-                {
-                    Width = 200,
-                    Content = field.FieldName,
-                    HorizontalContentAlignment = HorizontalAlignment.Right,
-                    VerticalContentAlignment = VerticalAlignment.Center
-                });
-                var fieldType = field.FieldType.ToEnum<FieldTypes>();
-                switch (fieldType)
-                {
-                    case FieldTypes.Tekst:
-                        customFieldContainer.Children.Add(new TextBox { Name = field.FieldName.Namify(), Text = field.StringValue ?? "" });
-                        break;
-                    case FieldTypes.Numeriek:
-                        customFieldContainer.Children.Add(new TextBox { Name = field.FieldName.Namify(), Text = field.NumericValue.ToString("0") });
-                        break;
-                    case FieldTypes.Datum:
-                        customFieldContainer.Children.Add(new DatePicker { Name = field.FieldName.Namify(), SelectedDate = field.DateValue });
-                        break;
-                    case FieldTypes.JaNee:
-                        customFieldContainer.Children.Add(new CheckBox { Name = field.FieldName.Namify(), IsChecked = field.BooleanValue });
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                layoutGrid.RowDefinitions.Add(new RowDefinition());
 
-                stackPanel.Children.Add(customFieldContainer);
+                var label = new Label
+                {
+                    Content = $"{field.FieldName}:",
+                    HorizontalContentAlignment = HorizontalAlignment.Right,
+                    VerticalContentAlignment = VerticalAlignment.Center,
+                };
+                label.SetValue(Grid.RowProperty, row);
+                label.SetValue(Grid.ColumnProperty, 0);
+                layoutGrid.Children.Add(label);
+
+                var editControl = CreateEditControl(field);
+                editControl.SetValue(Grid.RowProperty, row);
+                editControl.SetValue(Grid.ColumnProperty, 2);
+                layoutGrid.Children.Add(editControl);
+                
+                row++;
+            }
+        }
+
+        private static UIElement CreateEditControl(CustomFieldDto field)
+        {
+            switch (field.FieldType.ToEnum<FieldTypes>())
+            {
+                case FieldTypes.Tekst:
+                    return new TextBox
+                    {
+                        Name = field.FieldName.Namify(),
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        Text = field.StringValue ?? ""
+                    };
+                case FieldTypes.Numeriek:
+                    return new TextBox
+                    {
+                        Name = field.FieldName.Namify(),
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        Text = field.NumericValue?.ToString("0") ?? "0"
+                    };
+                case FieldTypes.Datum:
+                    return new DatePicker
+                    {
+                        Name = field.FieldName.Namify(),
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        SelectedDate = field.DateValue
+                    };
+                case FieldTypes.JaNee:
+                    return new CheckBox
+                    {
+                        Name = field.FieldName.Namify(),
+                        VerticalAlignment = VerticalAlignment.Center,
+                        IsChecked = field.BooleanValue
+                    };
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -75,6 +117,24 @@ namespace ScanMonitor.UI.DocumentDetail
         {
             var destination = ((Hyperlink)e.OriginalSource).NavigateUri;
             Process.Start(destination.ToString());
+        }
+
+        private void OnSaveClicked(object sender, RoutedEventArgs e)
+        {
+            // todo: map viewmodel to SaveDocumentCommand !!
+            // !! validation !!
+
+            var command = new SaveDocumentCommand
+            {
+                Id = Model.Id,
+                CorrespondentId = Model.CorrespondentId,
+                Beschrijving = Model.Beschrijving,
+                DatumOntvangen = Model.Datum,
+                PersonId = Model.PersonId
+            };
+            SaveDocumentHandler.Save(command);
+
+            MessageBox.Show("Wijzigingen bewaard", "Wijzigingen bewaard", MessageBoxButton.OK);
         }
     }
 }

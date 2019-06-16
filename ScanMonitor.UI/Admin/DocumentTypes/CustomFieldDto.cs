@@ -20,12 +20,4 @@
             };
         }
     }
-
-    public enum FieldTypes
-    {
-        Tekst,
-        Numeriek,
-        Datum,
-        JaNee,
-    }
 }

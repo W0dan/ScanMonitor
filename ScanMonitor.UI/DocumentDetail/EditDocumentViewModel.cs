@@ -9,14 +9,11 @@ namespace ScanMonitor.UI.DocumentDetail
 {
     public class EditDocumentViewModel
     {
-        public EditDocumentViewModel()
-        {
-            PeopleRefdata = GetPeopleQuery.List();
-            CorrespondentsRefdata = GetCorrespondentsQuery.List();
-        }
+        private List<PersonDto> peopleRefdata;
+        private List<CorrespondentDto> correspondentsRefdata;
 
-        public List<PersonDto> PeopleRefdata { get; }
-        public List<CorrespondentDto> CorrespondentsRefdata { get; }
+        public IEnumerable<PersonDto> PeopleRefdata => peopleRefdata ?? (peopleRefdata = GetPeopleQuery.List());
+        public IEnumerable<CorrespondentDto> CorrespondentsRefdata => correspondentsRefdata ?? (correspondentsRefdata = GetCorrespondentsQuery.List());
 
         public string DocumentType { get; set; }
 
@@ -27,5 +24,6 @@ namespace ScanMonitor.UI.DocumentDetail
 
         public ObservableCollection<CustomFieldDto> CustomFields { get; set; }
         public ObservableCollection<ScanDto> Scans { get; set; }
+        public string Id { get; set; }
     }
 }

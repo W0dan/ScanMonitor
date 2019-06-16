@@ -80,6 +80,7 @@
     <Compile Include="Admin\DocumentTypes\DocumentTypeDetailAdminWindow.xaml.cs">
       <DependentUpon>DocumentTypeDetailAdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DocumentTypes\FieldTypes.cs" />
     <Compile Include="Admin\GenericAdminViewModel.cs" />
     <Compile Include="Admin\GenericAdminWindow.xaml.cs">
       <DependentUpon>GenericAdminWindow.xaml</DependentUpon>

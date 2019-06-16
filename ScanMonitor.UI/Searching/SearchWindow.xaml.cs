@@ -132,6 +132,7 @@ namespace ScanMonitor.UI.Searching
             // -> navigate to detail of document
             var editDocumentViewModel = new EditDocumentViewModel
             {
+                Id = documentForEdit.Id,
                 DocumentType = documentForEdit.DocumentType,
                 Beschrijving = documentForEdit.Beschrijving,
                 CorrespondentId = documentForEdit.CorrespondentId,

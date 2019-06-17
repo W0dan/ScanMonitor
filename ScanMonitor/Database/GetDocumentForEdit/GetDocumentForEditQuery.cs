@@ -19,10 +19,14 @@ namespace ScanMonitor.Database.GetDocumentForEdit
 
             // ignore intValue -> put all numeric data into decimalValue !!
             const string getCustomFieldsQuery = ";with customFields as (" +
-                                                "select dcf.DocumentId, dtcf.DocumentTypeId, dtcf.FieldName, dtcf.FieldType, dcf.StringValue, DecimalValue, BooleanValue, DateValue " +
+                                                "select dcf.Id,  dcf.DocumentId, dtcf.Id as DocumentTypeCustomFieldId, dtcf.DocumentTypeId, dtcf.FieldName, dtcf.FieldType, dcf.StringValue, DecimalValue, BooleanValue, DateValue " +
                                                 "from DocumentCustomFields dcf " +
-                                                "full outer join DocumentTypeCustomFields dtcf on dcf.DocumentTypeCustomFieldId = dtcf.Id) " +
-                                                "select FieldName, FieldType, StringValue, DecimalValue, BooleanValue, DateValue " +
+                                                "full outer join DocumentTypeCustomFields dtcf on dcf.DocumentTypeCustomFieldId = dtcf.Id " +
+                                                "UNION " +
+                                                "select null as Id, null as DocumentId, dtcf.Id as DocumentTypeCustomFieldId, dtcf.DocumentTypeId, dtcf.FieldName, dtcf.FieldType, null as StringValue, null as DecimalValue, null as BooleanValue, null as DateValue " +
+                                                "from DocumentTypeCustomFields dtcf" +
+                                                ") " +
+                                                "select cf.Id, cf.DocumentTypeCustomFieldId, FieldName, FieldType, StringValue, DecimalValue as NumericValue, BooleanValue, DateValue " +
                                                 "from documents d " +
                                                 "inner join customFields cf on cf.DocumentId = d.Id or(cf.DocumentId is null AND cf.DocumentTypeId = d.DocumentTypeId) " +
                                                 "WHERE d.Id = @Id";

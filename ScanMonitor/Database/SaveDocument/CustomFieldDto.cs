@@ -4,6 +4,10 @@ namespace ScanMonitor.Database.SaveDocument
 {
     public class CustomFieldDto
     {
+        public string Id { get; set; }
+
+        public string DocumentTypeCustomFieldId { get; set; }
+
         public string FieldName { get; set; }
         public string FieldType { get; set; }
 

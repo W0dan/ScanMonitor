@@ -4,12 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Media;
 using ScanMonitor.Database.SaveDocument;
 using ScanMonitor.UI.Admin.DocumentTypes;
 using ScanMonitor.UI.Extensions;
+using CheckBox = System.Windows.Controls.CheckBox;
 using CustomFieldDto = ScanMonitor.Database.GetDocumentForEdit.CustomFieldDto;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
+using Label = System.Windows.Controls.Label;
+using MessageBox = System.Windows.MessageBox;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace ScanMonitor.UI.DocumentDetail
 {
@@ -43,7 +49,7 @@ namespace ScanMonitor.UI.DocumentDetail
         {
             var stackPanel = window.CustomFieldsStackPanel;
 
-            var layoutGrid = new Grid {HorizontalAlignment = HorizontalAlignment.Stretch};
+            var layoutGrid = new Grid { HorizontalAlignment = HorizontalAlignment.Stretch };
             layoutGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(pixels: 200) });
             layoutGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
@@ -68,7 +74,7 @@ namespace ScanMonitor.UI.DocumentDetail
                 editControl.SetValue(Grid.RowProperty, row);
                 editControl.SetValue(Grid.ColumnProperty, 2);
                 layoutGrid.Children.Add(editControl);
-                
+
                 row++;
             }
         }
@@ -78,39 +84,66 @@ namespace ScanMonitor.UI.DocumentDetail
             switch (field.FieldType.ToEnum<FieldTypes>())
             {
                 case FieldTypes.Tekst:
-                    return new TextBox
-                    {
-                        Name = field.FieldName.Namify(),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                        Text = field.StringValue ?? ""
-                    };
+                    return CreateTextBox(field);
                 case FieldTypes.Numeriek:
-                    return new TextBox
-                    {
-                        Name = field.FieldName.Namify(),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                        Text = field.NumericValue?.ToString("0") ?? "0"
-                    };
+                    return CreateNumericBox(field);
                 case FieldTypes.Datum:
-                    return new DatePicker
-                    {
-                        Name = field.FieldName.Namify(),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                        SelectedDate = field.DateValue
-                    };
+                    return CreateDatePicker(field);
                 case FieldTypes.JaNee:
-                    return new CheckBox
-                    {
-                        Name = field.FieldName.Namify(),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        IsChecked = field.BooleanValue
-                    };
+                    return CreateCheckBox(field);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private static CheckBox CreateCheckBox(CustomFieldDto field)
+        {
+            var checkBox = new CheckBox
+            {
+                Name = field.FieldName.Namify(),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            checkBox.SetBinding(ToggleButton.IsCheckedProperty, new Binding("BooleanValue") { Source = field });
+            return checkBox;
+        }
+
+        private static DatePicker CreateDatePicker(CustomFieldDto field)
+        {
+            var datePicker = new DatePicker
+            {
+                Name = field.FieldName.Namify(),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                SelectedDate = field.DateValue
+            };
+            datePicker.SetBinding(DatePicker.SelectedDateProperty, new Binding("DateValue") { Source = field });
+            return datePicker;
+        }
+
+        private static TextBox CreateTextBox(CustomFieldDto field)
+        {
+            var editControl = new TextBox
+            {
+                Name = field.FieldName.Namify(),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+            editControl.SetBinding(TextBox.TextProperty, new Binding("StringValue") { Source = field });
+
+            return editControl;
+        }
+
+        private static TextBox CreateNumericBox(CustomFieldDto field)
+        {
+            var editControl = new TextBox
+            {
+                Name = field.FieldName.Namify(),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+            editControl.SetBinding(TextBox.TextProperty, new Binding("NumericValue") { Source = field });
+
+            return editControl;
         }
 
         private void OnHyperlinkClicked(object sender, RoutedEventArgs e)
@@ -130,7 +163,18 @@ namespace ScanMonitor.UI.DocumentDetail
                 CorrespondentId = Model.CorrespondentId,
                 Beschrijving = Model.Beschrijving,
                 DatumOntvangen = Model.Datum,
-                PersonId = Model.PersonId
+                PersonId = Model.PersonId,
+                CustomFields = Model.CustomFields.Select(x => new Database.SaveDocument.CustomFieldDto
+                {
+                    Id = x.Id,
+                    DocumentTypeCustomFieldId = x.DocumentTypeCustomFieldId,
+                    FieldType = x.FieldType,
+                    FieldName = x.FieldName,
+                    NumericValue = x.NumericValue,
+                    StringValue = x.StringValue,
+                    BooleanValue = x.BooleanValue,
+                    DateValue = x.DateValue
+                }).ToList()
             };
             SaveDocumentHandler.Save(command);
 

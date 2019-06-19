@@ -7,6 +7,7 @@ namespace ScanMonitor.Database.GetDocumentForEdit
     {
         public string Id { get; set; }
         public string DocumentType { get; set; }
+        public string DocumentTypeId { get; set; }
         public string PersonId { get; set; }
         public string CorrespondentId { get; set; }
         public DateTime DatumOntvangen { get; set; }

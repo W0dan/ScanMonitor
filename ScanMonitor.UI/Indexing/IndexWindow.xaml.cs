@@ -232,7 +232,7 @@ namespace ScanMonitor.UI.Indexing
             {
                 Filename = FileName,
                 DocumentTypeId = new Guid(documentTypeIdString),
-                PersonId = new Guid(personIdString),
+                PersonId = personIdString,
                 CorrespondentId = new Guid(correspondentIdString),
                 Datum = DatumOntvangenDatePicker.SelectedDate ?? DateTime.Today,
                 Description = DescriptionTextbox.Text

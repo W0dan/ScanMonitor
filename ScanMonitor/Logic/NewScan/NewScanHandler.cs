@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using ScanMonitor.Config;
+using ScanMonitor.Database.CreateCustomFields;
 using ScanMonitor.Database.CreateDocument;
 using ScanMonitor.Database.CreateScan;
+using ScanMonitor.Database.GetCustomFields;
 using ScanMonitor.Database.GetDocumentFolderInfo;
 
 namespace ScanMonitor.Logic.NewScan
@@ -19,6 +22,16 @@ namespace ScanMonitor.Logic.NewScan
             var destinationFilename = MoveDocumentToCorrectLocation(command.Filename, documentId, scannedDocumentId);
 
             InsertScannedFile(destinationFilename, documentId, scannedDocumentId);
+            InsertCustomFields(documentId, command.CustomFields);
+        }
+
+        private static void InsertCustomFields(string documentId, List<CustomFieldDto> customFields)
+        {
+            CreateCustomFieldsQuery.Insert(new CreateCustomFieldsCommand
+            {
+                DocumentId = documentId,
+                CustomFields = customFields
+            });
         }
 
         private static string MoveDocumentToCorrectLocation(string filename, string documentId, string scannedDocumentId)

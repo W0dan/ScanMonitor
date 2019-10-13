@@ -59,6 +59,8 @@
     <Compile Include="Database\CorrespondentAanpassen\CorrespondentAanpassenQuery.cs" />
     <Compile Include="Database\CorrespondentVerwijderen\CorrespondentVerwijderenCommand.cs" />
     <Compile Include="Database\CorrespondentVerwijderen\CorrespondentVerwijderenQuery.cs" />
+    <Compile Include="Database\CreateCustomFields\CreateCustomFieldsCommand.cs" />
+    <Compile Include="Database\CreateCustomFields\CreateCustomFieldsQuery.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentCommand.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentQuery.cs" />
     <Compile Include="Database\CreateScan\CreateScanCommand.cs" />

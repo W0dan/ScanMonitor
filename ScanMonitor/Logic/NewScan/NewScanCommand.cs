@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using ScanMonitor.Database.GetCustomFields;
 
 namespace ScanMonitor.Logic.NewScan
 {
@@ -12,5 +14,6 @@ namespace ScanMonitor.Logic.NewScan
         public Guid CorrespondentId { get; set; }
         public DateTime Datum { get; set; }
         public string Description { get; set; }
+        public List<CustomFieldDto> CustomFields { get; set; }
     }
 }

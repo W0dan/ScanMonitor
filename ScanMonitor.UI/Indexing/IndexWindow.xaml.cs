@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,8 +24,9 @@ namespace ScanMonitor.UI.Indexing
     {
         private ObservableCollection<CorrespondentDto> correspondentDropdownItemsSource;
         private ObservableCollection<DocumentTypeDto> documentTypeDropdownItemsSource;
+        private List<CustomFieldDto> customFields;
         private string FileName { get; set; }
-
+        
         public IndexWindow()
         {
             InitializeComponent();
@@ -236,7 +238,8 @@ namespace ScanMonitor.UI.Indexing
                 PersonId = personIdString,
                 CorrespondentId = new Guid(correspondentIdString),
                 Datum = DatumOntvangenDatePicker.SelectedDate ?? DateTime.Today,
-                Description = DescriptionTextbox.Text
+                Description = DescriptionTextbox.Text,
+                CustomFields = customFields
             };
             NewScanHandler.Handle(command);
 
@@ -278,7 +281,7 @@ namespace ScanMonitor.UI.Indexing
         {
             var documentTypeId = ((DocumentTypeDto)DocumentTypeDropdown.SelectedItem).Id;
 
-            var customFields = GetCustomFieldsQuery.Get(new GetCustomFieldsRequest { DocumentTypeId = documentTypeId });
+            customFields = GetCustomFieldsQuery.Get(new GetCustomFieldsRequest { DocumentTypeId = documentTypeId });
 
             CustomFieldsStackPanel.CreateCustomFields(customFields);
         }

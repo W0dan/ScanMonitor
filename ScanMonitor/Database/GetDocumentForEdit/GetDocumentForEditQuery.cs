@@ -19,7 +19,7 @@ namespace ScanMonitor.Database.GetDocumentForEdit
 
             // ignore intValue -> put all numeric data into decimalValue !!
             const string getCustomFieldsQuery = ";with dtcf as ( " +
-                                                "select* " +
+                                                "select * " +
                                                 "from DocumentTypeCustomFields " +
                                                 "where DocumentTypeId = @DocumentTypeId " +
                                                 ") " +

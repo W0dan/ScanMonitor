@@ -1,7 +1,7 @@
 ﻿using ScanMonitor.Database._Interfaces;
 using System;
 
-namespace ScanMonitor.Database.GetDocumentForEdit
+namespace ScanMonitor.Database.GetCustomFields
 {
     public class CustomFieldDto : ICustomFieldDto
     {

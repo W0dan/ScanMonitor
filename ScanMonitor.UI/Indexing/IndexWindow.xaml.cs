@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using ScanMonitor.Database.CorrespondentToevoegen;
 using ScanMonitor.Database.DocumentTypeToevoegen;
 using ScanMonitor.Database.GetCorrespondents;
+using ScanMonitor.Database.GetCustomFields;
 using ScanMonitor.Database.GetDocumentsByToday;
 using ScanMonitor.Database.GetDocumentTypes;
 using ScanMonitor.Database.GetPeople;
@@ -271,6 +272,15 @@ namespace ScanMonitor.UI.Indexing
         private void OverslaanButton_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void DocumentTypeDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var documentTypeId = ((DocumentTypeDto)DocumentTypeDropdown.SelectedItem).Id;
+
+            var customFields = GetCustomFieldsQuery.Get(new GetCustomFieldsRequest { DocumentTypeId = documentTypeId });
+
+            CustomFieldsStackPanel.CreateCustomFields(customFields);
         }
     }
 }

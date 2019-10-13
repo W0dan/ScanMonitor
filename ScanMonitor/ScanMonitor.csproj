@@ -82,6 +82,9 @@
     <Compile Include="Database\DocumentTypeVerwijderen\DocumentTypeVerwijderenQuery.cs" />
     <Compile Include="Database\GetCorrespondents\CorrespondentDto.cs" />
     <Compile Include="Database\GetCorrespondents\GetCorrespondentsQuery.cs" />
+    <Compile Include="Database\GetCustomFields\CustomFieldDto.cs" />
+    <Compile Include="Database\GetCustomFields\GetCustomFieldsRequest.cs" />
+    <Compile Include="Database\GetCustomFields\GetCustomFieldsQuery.cs" />
     <Compile Include="Database\GetDocumentForEdit\CustomFieldDto.cs" />
     <Compile Include="Database\GetDocumentForEdit\DocumentDto.cs" />
     <Compile Include="Database\GetDocumentForEdit\GetDocumentForEditQuery.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="Database\UserToevoegen\UserToevoegenQuery.cs" />
     <Compile Include="Database\UserVerwijderen\UserVerwijderenCommand.cs" />
     <Compile Include="Database\UserVerwijderen\UserVerwijderenQuery.cs" />
+    <Compile Include="Database\_Interfaces\ICustomFieldDto.cs" />
     <Compile Include="Exceptions\ScanMonitorException.cs" />
     <Compile Include="Logic\NewScan\NewScanCommand.cs" />
     <Compile Include="Logic\NewScan\NewScanHandler.cs" />

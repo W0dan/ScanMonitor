@@ -50,16 +50,13 @@
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1" Grid.Column="0" FontSize="16" Name="DocumentTypeLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Document type:</Label>
-                <ComboBox Grid.Row="1" Grid.Column="1" FontSize="16" Name="DocumentTypeDropdown" VerticalAlignment="Center"></ComboBox>
+                <ComboBox Grid.Row="1" Grid.Column="1" FontSize="16" Name="DocumentTypeDropdown" VerticalAlignment="Center" SelectionChanged="DocumentTypeDropdown_SelectionChanged"></ComboBox>
                 <Button Grid.Row="1" Grid.Column="2" FontSize="16" Name="AddDocumentTypeButton" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1" Click="AddDocumentTypeButton_OnClick">+</Button>
 
                 <Label Grid.Row="2" Grid.Column="0" FontSize="16" Name="VoorWieLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Voor wie:</Label>
@@ -74,6 +71,11 @@
 
                 <Label Grid.Row="5" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Beschrijving:</Label>
                 <TextBox Grid.Row="5" Grid.Column="1" FontSize="16" Name="DescriptionTextbox" VerticalAlignment="Center"></TextBox>
+
+                <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="CustomFieldsStackPanel">
+                    <!--Todo: custom fields come here-->
+                </StackPanel>
+
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Name="Buttons">

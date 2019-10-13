@@ -22,9 +22,9 @@
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Label Grid.Row="0" Grid.Column="0" FontSize="16" Name="DocumentTypeLabel" VerticalAlignment="Center" HorizontalAlignment="Right">Document type:</Label>
         <ComboBox Grid.Row="0" Grid.Column="1" FontSize="16" Name="DocumentTypeDropdown" VerticalAlignment="Center"></ComboBox>
 
@@ -40,9 +40,11 @@
         <Label Grid.Row="4" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right">Zoekterm:</Label>
         <TextBox Grid.Row="4" Grid.Column="1" FontSize="16" Name="DescriptionTextbox" VerticalAlignment="Center"></TextBox>
 
-        <Button Grid.Row="5" Grid.Column="1" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick"><Image Source="../Images/Symbols Find.ico"></Image></Button>
-        
-        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding}">
+        <Button Grid.Row="5" Grid.Column="1" Margin="3" FontSize="16" HorizontalAlignment="Right" Name="SearchButton" Click="SearchButton_OnClick">
+            <Image Source="../Images/Symbols Find.ico"></Image>
+        </Button>
+
+        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Name="FoundItemsDataGrid" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DocumentType" Binding="{Binding DocumentType}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Voor wie ?" Binding="{Binding VoorWie}"></DataGridTextColumn>

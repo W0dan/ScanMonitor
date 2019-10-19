@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ScanMonitor.Database.SearchDocuments
 {
@@ -10,6 +12,17 @@ namespace ScanMonitor.Database.SearchDocuments
         public string Correspondent { get; set; }
         public DateTime DatumOntvangen { get; set; }
         public string Beschrijving { get; set; }
-        public string FileName { get; set; }
+        public string Files { get; set; }
+
+        public List<string> FileList
+        {
+            get
+            {
+                if (Files?.Trim()?.Length == 0)
+                    return new List<string>();
+                else
+                    return Files.Split(',').ToList();
+            }
+        }
     }
 }

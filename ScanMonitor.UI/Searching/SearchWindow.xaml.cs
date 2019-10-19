@@ -122,6 +122,16 @@ namespace ScanMonitor.UI.Searching
             throw new ScanMonitorException(message);
         }
 
+        private void OnViewDocumentClicked(object sender, MouseButtonEventArgs e)
+        {
+            var clickedItem = (DocumentDto)((FrameworkElement)sender).DataContext;
+
+            var fileUri = clickedItem.FileList.FirstOrDefault();
+            if (fileUri == null) return;
+
+            Process.Start(fileUri);
+        }
+
         private void OnDetailClicked(object sender, MouseButtonEventArgs e)
         {
             // -> new window : edit details of admin item  (specific)

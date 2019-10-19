@@ -50,14 +50,22 @@
                 <DataGridTextColumn Header="Voor wie ?" Binding="{Binding VoorWie}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Correspondent" Binding="{Binding Correspondent}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Datum ontvangen" Binding="{Binding DatumOntvangen, StringFormat=\{0:dd/MM/yyyy\}}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Beschrijving}"></DataGridTextColumn>
-                <DataGridHyperlinkColumn Header="Bestand" Binding="{Binding FileName}" Width="*">
-                    <DataGridHyperlinkColumn.ElementStyle>
-                        <Style>
-                            <EventSetter Event="Hyperlink.Click" Handler="OnHyperlinkClicked"></EventSetter>
+                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Beschrijving}" Width="*"></DataGridTextColumn>
+                
+                <DataGridTemplateColumn Header=""  MinWidth="30" MaxWidth="30">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <EventSetter Event="PreviewMouseLeftButtonDown"
+                                         Handler="OnViewDocumentClicked"/>
                         </Style>
-                    </DataGridHyperlinkColumn.ElementStyle>
-                </DataGridHyperlinkColumn>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="16px" Width="16px" Source="../Images/eye.png" Cursor="Hand" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTemplateColumn Header=""  MinWidth="30" MaxWidth="30">
                     <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">
@@ -71,6 +79,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn Header=""  MinWidth="30" MaxWidth="30">
                     <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">

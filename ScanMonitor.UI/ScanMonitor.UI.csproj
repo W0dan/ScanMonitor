@@ -190,5 +190,8 @@
   <ItemGroup>
     <Resource Include="Images\pen.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eye.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

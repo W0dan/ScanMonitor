@@ -34,20 +34,44 @@ namespace ScanMonitor.Database.SearchDocuments
             if (!string.IsNullOrWhiteSpace(request.SearchString))
             {
                 searchStringFilter = "AND (" +
-                                     $"dt.Name like '%{request.SearchString}%' " +
-                                     $"OR p.Name like '%{request.SearchString}%' " +
-                                     $"OR c.Name like '%{request.SearchString}%' " +
-                                     $"OR d.Description like '%{request.SearchString}%' " +
+                                     $"DocumentType like '%{request.SearchString}%' " +
+                                     $"OR VoorWie like '%{request.SearchString}%' " +
+                                     $"OR Correspondent like '%{request.SearchString}%' " +
+                                     $"OR Beschrijving like '%{request.SearchString}%' " +
                                      ") ";
             }
 
-            var query =
-                "SELECT d.Id, dt.Name as DocumentType, p.Name as VoorWie, c.Name as Correspondent, d.Datum as DatumOntvangen, d.Description as Beschrijving, s.FileName " +
-                "FROM documents d, DocumentTypes dt, Correspondents c, People p, Scans s " +
-                "WHERE d.DocumentTypeId = dt.Id " +
-                "AND d.CorrespondentId = c.Id " +
-                "AND d.PersonId = p.Id " +
-                "AND s.DocumentId = d.Id " +
+            var query = "with customFields as " +
+                "(" +
+                "SELECT d.Id as documentId," +
+                "STRING_AGG(" +
+                "dtcf.FieldName + '=' +" +
+                "case when dtcf.FieldType = 'JaNee' and dcf.BooleanValue = 1 then 'ja' " +
+                "when dtcf.FieldType = 'JaNee' and dcf.BooleanValue != 1 then 'nee' " +
+                "when dtcf.FieldType = 'Datum' then convert(varchar, dcf.DateValue) " +
+                "when dtcf.FieldType = 'Numeriek' then cast(dcf.DecimalValue as varchar) " +
+                "else dcf.StringValue end, ', ') as Value " +
+                "FROM documents d " +
+                "left outer join DocumentTypeCustomFields dtcf on dtcf.DocumentTypeId = d.DocumentTypeId " +
+                "left outer join DocumentCustomFields dcf on dcf.DocumentTypeCustomFieldId = dtcf.id and dcf.DocumentId = d.Id " +
+                "group by d.Id)," +
+                "documentscans as (" +
+                "SELECT d.Id as documentId, " +
+                "STRING_AGG(s.Filename, ',') as Files " +
+                "FROM documents d " +
+                "inner join Scans s on s.DocumentId = d.id " +
+                "group by d.Id), " +
+                "documentsJoined as (" +
+                "select d.Id, dt.Name as DocumentType, p.Name as VoorWie, c.Name as Correspondent, d.Datum as DatumOntvangen, trim(coalesce(d.Description, '') + ' ' + coalesce(cf.Value, '')) as Beschrijving, s.Files " +
+                "from documents d " +
+                "inner join DocumentTypes dt on d.DocumentTypeId = dt.Id " +
+                "inner join Correspondents c on d.CorrespondentId = c.Id " +
+                "inner join People p on d.PersonId = p.Id " +
+                "inner join documentscans s on s.DocumentId = d.Id " +
+                "left outer join customFields cf on cf.documentId = d.Id) " +
+                "SELECT Id, DocumentType, VoorWie, Correspondent, DatumOntvangen, Beschrijving, Files " +
+                "FROM documentsJoined " +
+                "WHERE 1=1 " +
                 $"{documentTypeFilter} " +
                 $"{correspondentFilter} " +
                 $"{voorWieFilter} " +

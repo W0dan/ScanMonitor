@@ -14,15 +14,17 @@ namespace ScanMonitor.Logic.NewScan
     {
         public static void Handle(NewScanCommand command)
         {
-            var documentId = command.DocumentId.HasValue 
-                ? command.DocumentId?.ToString() 
-                : InsertDocument(command);
+            var isNewDocument = !command.DocumentId.HasValue;
+            var documentId = isNewDocument 
+                ? InsertDocument(command)
+                : command.DocumentId?.ToString();
 
             var scannedDocumentId = Guid.NewGuid().ToString();
             var destinationFilename = MoveDocumentToCorrectLocation(command.Filename, documentId, scannedDocumentId);
 
             InsertScannedFile(destinationFilename, documentId, scannedDocumentId);
-            InsertCustomFields(documentId, command.CustomFields);
+            if (isNewDocument)
+                InsertCustomFields(documentId, command.CustomFields);
         }
 
         private static void InsertCustomFields(string documentId, List<CustomFieldDto> customFields)

@@ -6,8 +6,18 @@ namespace ScanMonitor.UI.Extensions
     {
         public static bool CanAccessFile(this string filename)
         {
-            using (var fs = File.OpenRead(filename))
+            for (var i = 0; i < 10; i++)
             {
+                try
+                {
+                    using (var fs = File.OpenRead(filename)) { }
+
+                    return true; ;
+                }
+                catch (System.Exception)
+                {
+                    System.Threading.Thread.Sleep(100);
+                }
             }
 
             return true;

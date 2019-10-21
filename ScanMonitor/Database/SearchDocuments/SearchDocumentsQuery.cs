@@ -17,19 +17,19 @@ namespace ScanMonitor.Database.SearchDocuments
 
             if (request.DocumentTypeId != null)
             {
-                documentTypeFilter = $"AND dt.Id = '{request.DocumentTypeId}' ";
+                documentTypeFilter = $"AND DocumentTypeId = '{request.DocumentTypeId}' ";
             }
             if (request.PersonId != null)
             {
-                voorWieFilter = $"AND p.Id = '{request.PersonId}' ";
+                voorWieFilter = $"AND PersonId = '{request.PersonId}' ";
             }
             if (request.CorrespondentId != null)
             {
-                correspondentFilter = $"AND c.Id = '{request.CorrespondentId}' ";
+                correspondentFilter = $"AND CorrespondentId = '{request.CorrespondentId}' ";
             }
             if (request.Datum.HasValue)
             {
-                datumOntvangenFilter = $"AND d.Datum = '{request.Datum:yyyy-MM-dd}' ";
+                datumOntvangenFilter = $"AND DatumOntvangen = '{request.Datum:yyyy-MM-dd}' ";
             }
             if (!string.IsNullOrWhiteSpace(request.SearchString))
             {
@@ -62,7 +62,8 @@ namespace ScanMonitor.Database.SearchDocuments
                 "inner join Scans s on s.DocumentId = d.id " +
                 "group by d.Id), " +
                 "documentsJoined as (" +
-                "select d.Id, dt.Name as DocumentType, p.Name as VoorWie, c.Name as Correspondent, d.Datum as DatumOntvangen, trim(coalesce(d.Description, '') + ' ' + coalesce(cf.Value, '')) as Beschrijving, s.Files " +
+                "select d.Id, dt.Name as DocumentType, p.Name as VoorWie, c.Name as Correspondent, d.Datum as DatumOntvangen, trim(coalesce(d.Description, '') + ' ' + coalesce(cf.Value, '')) as Beschrijving, s.Files\n" +
+                ",c.Id as CorrespondentId, p.Id as PersonId, dt.Id as DocumentTypeId\n" + 
                 "from documents d " +
                 "inner join DocumentTypes dt on d.DocumentTypeId = dt.Id " +
                 "inner join Correspondents c on d.CorrespondentId = c.Id " +

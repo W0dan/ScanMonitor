@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using ScanMonitor.Config;
+using ScanMonitor.Logic.CreateFullBackup;
 using ScanMonitor.UI.Admin;
 using ScanMonitor.UI.Admin.Correspondents;
 using ScanMonitor.UI.Admin.DocumentTypes;
@@ -57,5 +58,8 @@ namespace ScanMonitor.UI
 
         private void AdminCorrespondentsMenuItem_OnClick(object sender, RoutedEventArgs e) 
             => GenericAdminWindow.ShowAdmin(this, new CorrespondentAdminViewModel());
+
+        private void BackupMenuItem_Click(object sender, RoutedEventArgs e)
+            => CreateFullBackupHandler.CreateBackup();
     }
 }

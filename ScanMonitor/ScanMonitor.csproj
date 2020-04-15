@@ -63,6 +63,8 @@
     <Compile Include="Database\CreateCustomFields\CreateCustomFieldsQuery.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentCommand.cs" />
     <Compile Include="Database\CreateDocument\CreateDocumentQuery.cs" />
+    <Compile Include="Extensions\DirectoryInfoExtensions.cs" />
+    <Compile Include="Logic\CreateFullBackup\CreateFullBackupHandler.cs" />
     <Compile Include="Database\CreateScan\CreateScanCommand.cs" />
     <Compile Include="Database\CreateScan\CreateScanQuery.cs" />
     <Compile Include="Database\CustomFieldAanpassen\CustomFieldAanpassenCommand.cs" />

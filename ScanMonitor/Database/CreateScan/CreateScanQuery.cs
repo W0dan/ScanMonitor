@@ -9,7 +9,7 @@ namespace ScanMonitor.Database.CreateScan
         {
             using (var connection = AppConfig.Connections.ScanDbConnection)
             {
-                const string query = "INSERT INTO Scans(Id, DocumentId, Filename, Datum) " +
+                const string query = "INSERT INTO Scans(Id, DocumentId, PartialFilename, Datum) " +
                                      "VALUES(@Id, @DocumentId, @Filename, @Datum)";
 
                 connection.Execute(query, command);

@@ -40,7 +40,8 @@ namespace ScanMonitor.Logic.NewScan
         {
             var documentInfo = GetDocumentFolderInfoQuery.Get(documentId);
 
-            var destinationFolder = Path.Combine(AppConfig.AppSettings.RootDocumentPath, documentInfo.Person, documentInfo.Correspondent);
+            var partialFolder = Path.Combine(documentInfo.Person, documentInfo.Correspondent);
+            var destinationFolder = Path.Combine(AppConfig.AppSettings.RootDocumentPath, partialFolder);
             var folder = new DirectoryInfo(destinationFolder);
             if (!folder.Exists)
             {
@@ -51,10 +52,9 @@ namespace ScanMonitor.Logic.NewScan
 
             var scannedFile = new FileInfo(filename);
             var fileName = $"{documentInfo.Datum:yyyy-MM-dd}_{documentType}_{scannedDocumentId}{scannedFile.Extension}";
-            var destinationFilename = Path.Combine(folder.FullName, fileName);
 
-            scannedFile.MoveTo(destinationFilename);
-            return destinationFilename;
+            scannedFile.MoveTo(Path.Combine(folder.FullName, fileName));
+            return Path.Combine(partialFolder, fileName);
         }
 
         private static void InsertScannedFile(string destinationFilename, string documentId, string scannedDocumentId)

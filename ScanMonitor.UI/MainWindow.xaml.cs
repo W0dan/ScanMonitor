@@ -21,6 +21,8 @@ namespace ScanMonitor.UI
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
+            BackupWindow.StartBackup(this);
+
             _worker.DoWork += WaitForFiles;
 
             _worker.RunWorkerAsync();
@@ -60,6 +62,6 @@ namespace ScanMonitor.UI
             => GenericAdminWindow.ShowAdmin(this, new CorrespondentAdminViewModel());
 
         private void BackupMenuItem_Click(object sender, RoutedEventArgs e)
-            => CreateFullBackupHandler.CreateBackup();
+            => BackupWindow.StartBackup(this);
     }
 }

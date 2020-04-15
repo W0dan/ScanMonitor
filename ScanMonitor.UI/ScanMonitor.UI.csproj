@@ -86,6 +86,9 @@
       <DependentUpon>GenericAdminWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Admin\Users\UserAdminViewModel.cs" />
+    <Compile Include="BackupWindow.xaml.cs">
+      <DependentUpon>BackupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Base\ListViewModel.cs" />
     <Compile Include="DocumentDetail\EditDocument.xaml.cs">
       <DependentUpon>EditDocument.xaml</DependentUpon>
@@ -98,6 +101,10 @@
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Admin\DocumentTypes\DocumentTypeDetailAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BackupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

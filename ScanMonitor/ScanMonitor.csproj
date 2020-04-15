@@ -124,6 +124,7 @@
     <Compile Include="Database\UserVerwijderen\UserVerwijderenQuery.cs" />
     <Compile Include="Database\_Interfaces\ICustomFieldDto.cs" />
     <Compile Include="Exceptions\ScanMonitorException.cs" />
+    <Compile Include="Logic\CreateFullBackup\ProgressInfo.cs" />
     <Compile Include="Logic\NewScan\NewScanCommand.cs" />
     <Compile Include="Logic\NewScan\NewScanHandler.cs" />
     <Compile Include="Logic\RemoveScan\RemoveScanCommand.cs" />

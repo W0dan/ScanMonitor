@@ -12,7 +12,7 @@ using ScanMonitor.Database.GetPeople;
 using ScanMonitor.Database.SearchDocuments;
 using ScanMonitor.Exceptions;
 using ScanMonitor.UI.DocumentDetail;
-using DocumentDto = ScanMonitor.Database.SearchDocuments.DocumentDto;
+//using DocumentDto = ScanMonitor.Database.SearchDocuments.DocumentDto;
 
 namespace ScanMonitor.UI.Searching
 {
@@ -83,7 +83,7 @@ namespace ScanMonitor.UI.Searching
             };
             var results = SearchDocumentsQuery.List(request);
 
-            FoundItemsDataGrid.DataContext = new ObservableCollection<DocumentDto>(results);
+            FoundItemsDataGrid.DataContext = new ObservableCollection<DocumentViewModel>(results.Select(x => new DocumentViewModel(x)));
         }
 
         private void OnHyperlinkClicked(object sender, RoutedEventArgs e)
@@ -94,7 +94,7 @@ namespace ScanMonitor.UI.Searching
 
         private void OnDeleteClicked(object sender, MouseButtonEventArgs e)
         {
-            var document = (DocumentDto)((FrameworkElement)sender).DataContext;
+            var document = (DocumentViewModel)((FrameworkElement)sender).DataContext;
 
             var result = MessageBox.Show($"Ben je zeker dat je document {document.Beschrijving} van " +
                             $"{document.Correspondent} voor {document.VoorWie} op datum " +
@@ -109,7 +109,7 @@ namespace ScanMonitor.UI.Searching
                 Id = document.Id
             });
 
-            var dataContext = (ObservableCollection<DocumentDto>)FoundItemsDataGrid.DataContext;
+            var dataContext = (ObservableCollection<DocumentViewModel>)FoundItemsDataGrid.DataContext;
             var doc = dataContext.Single(x => x.Id == document.Id);
             dataContext.Remove(doc);
 
@@ -124,7 +124,7 @@ namespace ScanMonitor.UI.Searching
 
         private void OnViewDocumentClicked(object sender, MouseButtonEventArgs e)
         {
-            var clickedItem = (DocumentDto)((FrameworkElement)sender).DataContext;
+            var clickedItem = (DocumentViewModel)((FrameworkElement)sender).DataContext;
 
             var fileUri = clickedItem.FileList.FirstOrDefault();
             if (fileUri == null) return;
@@ -135,7 +135,7 @@ namespace ScanMonitor.UI.Searching
         private void OnDetailClicked(object sender, MouseButtonEventArgs e)
         {
             // -> new window : edit details of admin item  (specific)
-            var clickedItem = (DocumentDto)((FrameworkElement)sender).DataContext;
+            var clickedItem = (DocumentViewModel)((FrameworkElement)sender).DataContext;
 
             var documentForEdit = GetDocumentForEditQuery.Get(new GetDocumentForEditRequest { Id = clickedItem.Id });
 

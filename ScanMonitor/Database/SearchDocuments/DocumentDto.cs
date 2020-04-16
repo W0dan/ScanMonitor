@@ -18,7 +18,7 @@ namespace ScanMonitor.Database.SearchDocuments
         {
             get
             {
-                if (Files?.Trim()?.Length == 0)
+                if (Files == null || Files.Trim().Length == 0)
                     return new List<string>();
                 else
                     return Files.Split(',').ToList();

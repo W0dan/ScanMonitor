@@ -1,4 +1,4 @@
-﻿<Window x:Class="ScanMonitor.UI.Searching.SearchWindow"
+﻿    <Window x:Class="ScanMonitor.UI.Searching.SearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         Loaded="SearchWindow_OnLoaded"
         ShowInTaskbar="False">
-    <Grid Margin="10">
+   <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -61,7 +61,7 @@
                     </DataGridTemplateColumn.CellStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Height="16px" Width="16px" Source="../Images/eye.png" Cursor="Hand" />
+                            <Image Height="16px" Width="16px" Source="../Images/eye.png" Cursor="Hand" Visibility="{Binding FileVisibility}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

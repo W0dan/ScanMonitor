@@ -90,6 +90,7 @@
       <DependentUpon>BackupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Base\ListViewModel.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="DocumentDetail\EditDocument.xaml.cs">
       <DependentUpon>EditDocument.xaml</DependentUpon>
     </Compile>
@@ -97,6 +98,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StackPanelExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Searching\DocumentViewModel.cs" />
     <Compile Include="Searching\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>

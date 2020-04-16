@@ -14,6 +14,11 @@ namespace ScanMonitor.Database.DeleteDocument
 
                 connection.Execute(deleteScansQuery, command);
 
+                const string deleteCustomFieldsQuery = "DELETE FROM DocumentCustomFields " +
+                                                       "WHERE DocumentId = @Id";
+
+                connection.Execute(deleteCustomFieldsQuery, command);
+
                 const string deleteDocumentQuery = "DELETE FROM documents " +
                                      "WHERE Id = @Id";
 

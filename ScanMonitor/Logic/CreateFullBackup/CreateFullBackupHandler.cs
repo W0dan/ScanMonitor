@@ -2,6 +2,7 @@
 using ScanMonitor.Extensions;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace ScanMonitor.Logic.CreateFullBackup
 {
@@ -28,6 +29,10 @@ namespace ScanMonitor.Logic.CreateFullBackup
                         currentIndex++;
                         reportProgressCallback(new ProgressInfo { Total = totalNumberOfSourceFiles, Current = currentIndex, Text = x.Text });
                     });
+                }
+                else
+                {
+                    Thread.Sleep(100);
                 }
             }
         }

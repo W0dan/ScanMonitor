@@ -59,7 +59,7 @@ namespace ScanMonitor.Database.SearchDocuments
                 "SELECT d.Id as documentId, " +
                 "STRING_AGG(s.Filename, ',') as Files " +
                 "FROM documents d " +
-                "inner join Scans s on s.DocumentId = d.id " +
+                "left outer join Scans s on s.DocumentId = d.id " +
                 "group by d.Id), " +
                 "documentsJoined as (" +
                 "select d.Id, dt.Name as DocumentType, p.Name as VoorWie, c.Name as Correspondent, d.Datum as DatumOntvangen, trim(coalesce(d.Description, '') + ' ' + coalesce(cf.Value, '')) as Beschrijving, s.Files\n" +

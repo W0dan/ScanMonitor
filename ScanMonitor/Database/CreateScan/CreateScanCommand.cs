@@ -6,7 +6,7 @@ namespace ScanMonitor.Database.CreateScan
     {
         public string Id { get; set; }
         public string DocumentId { get; set; }
-        public string Filename { get; set; }
+        public string PartialFilename { get; set; }
         public DateTime Datum { get; set; }
     }
 }

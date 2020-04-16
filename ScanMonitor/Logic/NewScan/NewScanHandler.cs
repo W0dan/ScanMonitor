@@ -63,7 +63,7 @@ namespace ScanMonitor.Logic.NewScan
             {
                 Id = scannedDocumentId,
                 Datum = DateTime.Now,
-                Filename = destinationFilename,
+                PartialFilename = destinationFilename,
                 DocumentId = documentId
             });
         }

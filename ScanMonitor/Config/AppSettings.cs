@@ -16,6 +16,24 @@ namespace ScanMonitor.Config
                 return backupLocations.ToList();
             }
         }
+        public bool BackupOnStartup
+        {
+            get
+            {
+                var backupOnStartupString = ConfigurationManager.AppSettings[nameof(BackupOnStartup)];
+
+                return backupOnStartupString != "0";
+            }
+        }
+        public bool BackupOnClosing
+        {
+            get
+            {
+                var backupOnClosingString = ConfigurationManager.AppSettings[nameof(BackupOnClosing)];
+
+                return backupOnClosingString != "0";
+            }
+        }
         public string RootDocumentPath => ConfigurationManager.AppSettings[nameof(RootDocumentPath)];
         public string ScanPath => ConfigurationManager.AppSettings[nameof(ScanPath)];
     }

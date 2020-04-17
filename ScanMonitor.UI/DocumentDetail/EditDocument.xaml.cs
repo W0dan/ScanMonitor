@@ -41,7 +41,6 @@ namespace ScanMonitor.UI.DocumentDetail
 
         private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
-            // todo: map viewmodel to SaveDocumentCommand !!
             // !! validation !!
 
             var command = new SaveDocumentCommand
@@ -51,7 +50,7 @@ namespace ScanMonitor.UI.DocumentDetail
                 Beschrijving = Model.Beschrijving,
                 DatumOntvangen = Model.Datum,
                 PersonId = Model.PersonId,
-                CustomFields = Model.CustomFields.Select(x => new Database.SaveDocument.CustomFieldDto
+                CustomFields = Model.CustomFields.Select(x => new CustomFieldDto
                 {
                     Id = x.Id,
                     DocumentTypeCustomFieldId = x.DocumentTypeCustomFieldId,

@@ -47,7 +47,7 @@ namespace ScanMonitor.Logic.NewScan
                 folder.Create();
             }
 
-            var documentType = documentInfo.DocumentType.Replace(" ", "_");
+            string documentType = Sanitize(documentInfo);
 
             var scannedFile = new FileInfo(filename);
             var fileName = $"{documentInfo.Datum:yyyy-MM-dd}_{documentType}_{scannedDocumentId}{scannedFile.Extension}";
@@ -55,6 +55,13 @@ namespace ScanMonitor.Logic.NewScan
 
             scannedFile.MoveTo(destinationFilename);
             return destinationFilename;
+        }
+
+        private static string Sanitize(DocumentDto documentInfo)
+        {
+            var documentType = documentInfo.DocumentType.Replace(" ", "_");
+            documentType = documentType.Replace("/", "_");
+            return documentType;
         }
 
         private static void InsertScannedFile(string destinationFilename, string documentId, string scannedDocumentId)
